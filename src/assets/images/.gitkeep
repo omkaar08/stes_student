@@ -1,0 +1,9 @@
+# Images Directory
+
+Place all image assets here. Images will be referenced from components using relative paths.
+
+## Recommended Structure:
+- logo/
+- icons/
+- backgrounds/
+- avatars/
