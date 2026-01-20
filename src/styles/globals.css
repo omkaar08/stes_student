@@ -32,6 +32,24 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Slide down animation for nested menu items */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 500px;
+    }
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.3s ease-out forwards;
+  }
 }
 
 /* Base styles */
@@ -84,11 +102,11 @@
   }
 
   .card {
-    @apply bg-white rounded-lg border border-gray-200 shadow-sm;
+    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white px-4 py-2 rounded-lg font-medium transition-all hover:bg-primary-700 active:scale-95;
+    @apply text-white px-4 py-2 rounded-lg font-medium transition-all hover:opacity-90 active:scale-95;
   }
 
   .btn-secondary {

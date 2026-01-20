@@ -55,8 +55,9 @@ export interface NavItem {
   id: string;
   label: string;
   icon: React.ReactNode;
-  href: string;
+  href?: string;
   color?: string;
+  children?: NavItem[];
 }
 
 export interface SidebarProps {

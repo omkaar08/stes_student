@@ -56,26 +56,27 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
   const getLeaveTypeColor = (type: string) => {
     switch (type) {
       case 'casual':
-        return 'bg-blue-50 text-blue-700';
+        return 'bg-[#0A6E8A]/10 text-[#0A6E8A]';
       case 'medical':
         return 'bg-red-50 text-red-700';
       default:
-        return 'bg-purple-50 text-purple-700';
+        return 'bg-amber-50 text-amber-700';
     }
   };
 
   return (
     <>
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-full flex flex-col">
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-full flex flex-col">
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">Leave Management</h2>
-            <p className="text-sm text-gray-600">Apply and track your leave applications</p>
+            <h2 className="heading-lg">Leave Management</h2>
+            <p className="body-text">Apply and track your leave applications</p>
           </div>
           <button 
             onClick={() => setShowApplyModal(true)}
-            className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+            className="hover:opacity-90 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-all"
+            style={{ backgroundColor: '#0A6E8A' }}
           >
             Apply Leave
           </button>
@@ -84,7 +85,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
         {/* Leave Balance Summary */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {data.balances.map((balance) => (
-            <div key={balance.type} className="bg-gray-50 border border-gray-200 rounded-xl p-4 cursor-pointer hover:border-blue-300 hover:shadow-sm transition-all">
+            <div key={balance.type} className="bg-white border border-gray-200 rounded-lg p-4 cursor-pointer hover:shadow-sm transition-all">
               <div className="text-xs font-semibold text-gray-600 mb-2">{balance.label}</div>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-xl font-bold text-gray-900">{balance.remaining}</span>
@@ -97,7 +98,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
 
         {/* Recent Leave Applications */}
         <div className="flex-1 overflow-hidden flex flex-col">
-          <h3 className="text-sm font-semibold text-gray-900 mb-3">Recent Applications</h3>
+          <h3 className="heading-sm mb-3">Recent Applications</h3>
           <div className="flex-1 overflow-y-auto space-y-2">
             {data.applications.map((application) => (
               <button
@@ -112,7 +113,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                       {application.type.charAt(0).toUpperCase()}
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="text-xs font-bold text-gray-900 truncate group-hover:text-blue-700 transition-colors">
+                      <div className="text-xs font-bold text-gray-900 truncate group-hover:text-[#0A6E8A] transition-colors">
                         {application.dateRange}
                       </div>
                       <div className="text-xs text-gray-600 line-clamp-1">{application.reason}</div>
@@ -144,7 +145,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
 
           <div className="relative w-[92%] max-w-md bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
             {/* Header */}
-            <div className="bg-blue-600 px-6 py-5 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#0A6E8A] to-[#0a5d75] px-6 py-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
                   <FileText size={20} className="text-white" />
@@ -169,7 +170,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                   name="leaveType"
                   value={formData.leaveType}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-50 transition-colors bg-white text-gray-900"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A6E8A] focus:ring-2 focus:ring-[#0A6E8A]/20 transition-colors bg-white text-gray-900"
                 >
                   <option value="casual">Casual Leave</option>
                   <option value="medical">Medical Leave</option>
@@ -186,7 +187,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                     name="fromDate"
                     value={formData.fromDate}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-50 transition-colors"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A6E8A] focus:ring-2 focus:ring-[#0A6E8A]/20 transition-colors"
                   />
                 </div>
                 <div>
@@ -196,7 +197,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                     name="toDate"
                     value={formData.toDate}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-50 transition-colors"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A6E8A] focus:ring-2 focus:ring-[#0A6E8A]/20 transition-colors"
                   />
                 </div>
               </div>
@@ -209,7 +210,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                   value={formData.reason}
                   onChange={handleInputChange}
                   placeholder="Enter reason for leave..."
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-50 transition-colors resize-none h-24 text-gray-900"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-[#0A6E8A] focus:ring-2 focus:ring-[#0A6E8A]/20 transition-colors resize-none h-24 text-gray-900"
                 />
               </div>
 
@@ -224,7 +225,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ data }) => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-[#0A6E8A] hover:bg-[#085a70] text-white font-semibold rounded-lg transition-colors"
                 >
                   Submit Application
                 </button>

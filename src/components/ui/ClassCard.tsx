@@ -9,8 +9,8 @@ const ClassCard: React.FC<ClassCardProps> = ({ session }) => {
 
   const getStatusStyles = (status: ClassStatus) => {
     const styles = {
-      completed: 'bg-orange-100 text-orange-700',
-      ongoing: 'bg-blue-100 text-blue-700',
+      completed: 'bg-amber-100 text-amber-700',
+      ongoing: 'bg-teal-100 text-teal-700',
       upcoming: 'bg-gray-100 text-gray-700',
     };
     return styles[status];
@@ -33,9 +33,13 @@ const ClassCard: React.FC<ClassCardProps> = ({ session }) => {
         bg-white rounded-lg p-6 cursor-pointer transition-all duration-200
         border-2
         ${isHovered || isSelected 
-          ? 'border-blue-900 shadow-lg' 
-          : 'border-gray-200 shadow-sm hover:shadow-md hover:border-blue-100'}
+          ? 'border-teal-600 shadow-lg' 
+          : 'border-gray-200 shadow-sm hover:shadow-md'}
       `}
+      style={{
+        borderColor: isHovered || isSelected ? '#0A6E8A' : '#E5E7EB',
+        borderWidth: '2px'
+      }}
     >
       <div className="flex items-start justify-between mb-4">
         <span className={`
@@ -46,7 +50,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ session }) => {
           <span className="inline-block w-2 h-2 rounded-full bg-current"></span>
           {getStatusLabel(session.status)}
         </span>
-        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#0A6E8A' }}>
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
         </svg>
       </div>

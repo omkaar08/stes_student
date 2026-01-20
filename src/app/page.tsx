@@ -1,3 +1,6 @@
+"use client";
+
+import { useMemo } from 'react';
 import MainLayout from '@/layouts/MainLayout';
 import StatCard from '@/components/ui/StatCard';
 import TodayClasses from '@/components/ui/TodayClasses';
@@ -9,21 +12,24 @@ import MarkAttendance from '@/components/ui/MarkAttendance';
 import TodaysMeetings from '@/components/ui/TodaysMeetings';
 import LeaveManagement from '@/components/ui/LeaveManagement';
 import RecentActivity from '@/components/ui/RecentActivity';
-
-import {
-  dashboardStats,
-  todayClassesData,
-  performanceChartData,
-  alertsData,
-  engagementTrendsData,
-  upcomingExamsData,
-  todaysMeetingsData,
-  markAttendanceData,
-  leaveManagementData,
-  recentActivityData,
-} from '@/data/dummyData';
+import { getDashboardData } from '@/data/dummyData';
+import { useAcademicContext } from '@/contexts/AcademicContext';
 
 export default function HomePage() {
+  const { academicYear, semester } = useAcademicContext();
+  const {
+    dashboardStats,
+    todayClassesData,
+    performanceChartData,
+    alertsData,
+    engagementTrendsData,
+    upcomingExamsData,
+    todaysMeetingsData,
+    markAttendanceData,
+    leaveManagementData,
+    recentActivityData,
+  } = useMemo(() => getDashboardData(academicYear, semester), [academicYear, semester]);
+
   return (
     <MainLayout>
       <div className="p-8 w-full">
@@ -45,7 +51,7 @@ export default function HomePage() {
 
         {/* Performance Chart & Alerts Section - 70% + 30% layout */}
         <div className="mt-8 grid grid-cols-12 gap-6">
-          <div className="col-span-8">
+          <div className="col-span-12 lg:col-span-8">
             <PerformanceChart data={performanceChartData} />
 
             {/* Student Engagement Trends Section - Same spacing as column gap */}
@@ -57,7 +63,7 @@ export default function HomePage() {
               <MarkAttendance data={markAttendanceData} />
             </div>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-12 lg:col-span-4">
             <div className="space-y-6">
               <AlertsNotifications data={alertsData} />
               <UpcomingExams data={upcomingExamsData} />
@@ -67,7 +73,7 @@ export default function HomePage() {
         </div>
 
         {/* Leave Management & Recent Activity Section - 50% + 50% layout */}
-        <div className="mt-8 grid grid-cols-2 gap-6">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
           <LeaveManagement data={leaveManagementData} />
           <RecentActivity data={recentActivityData} />
         </div>

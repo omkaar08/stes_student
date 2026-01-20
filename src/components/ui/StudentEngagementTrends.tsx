@@ -45,9 +45,9 @@ const StudentEngagementTrends: React.FC<StudentEngagementTrendsProps> = ({ data 
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <h2 className="heading-lg">Student Engagement Trends</h2>
-          <div className="flex items-center gap-1.5 bg-blue-50 px-2 py-1 rounded-md">
-            <TrendingUp size={16} className="text-blue-700" />
-            <span className="label-text text-blue-800">+{currentData.growth}%</span>
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-md" style={{ backgroundColor: '#F0FDFA' }}>
+            <TrendingUp size={16} style={{ color: '#0A6E8A' }} />
+            <span className="label-text" style={{ color: '#0A6E8A' }}>+{currentData.growth}%</span>
           </div>
         </div>
 
@@ -57,9 +57,10 @@ const StudentEngagementTrends: React.FC<StudentEngagementTrendsProps> = ({ data 
             onClick={() => handleViewChange('weekly')}
             className={`px-4 py-1.5 rounded-md font-semibold text-sm transition-all duration-300 ${
               view === 'weekly'
-                ? 'bg-blue-600 text-white shadow-md'
+                ? 'text-white shadow-md'
                 : 'bg-transparent text-gray-600 hover:text-gray-900'
             }`}
+            style={view === 'weekly' ? { backgroundColor: '#0A6E8A' } : {}}
           >
             WEEKLY
           </button>
@@ -67,33 +68,34 @@ const StudentEngagementTrends: React.FC<StudentEngagementTrendsProps> = ({ data 
             onClick={() => handleViewChange('monthly')}
             className={`px-4 py-1.5 rounded-md font-semibold text-sm transition-all duration-300 ${
               view === 'monthly'
-                ? 'bg-blue-600 text-white shadow-md'
+                ? 'text-white shadow-md'
                 : 'bg-transparent text-gray-600 hover:text-gray-900'
             }`}
+            style={view === 'monthly' ? { backgroundColor: '#0A6E8A' } : {}}
           >
             MONTHLY
           </button>
         </div>
       </div>
 
-      {/* Metrics Row - Soft Blue Palette */}
+      {/* Metrics Row - Teal Palette */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         {/* Average */}
-        <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-          <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-2">Average</p>
-          <p className="text-2xl font-bold text-blue-900">{currentData.average}%</p>
+        <div className="rounded-lg p-4 border" style={{ backgroundColor: '#F0FDFA', borderColor: '#E0F2FE' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: '#0A6E8A' }}>Average</p>
+          <p className="text-2xl font-bold" style={{ color: '#0A6E8A' }}>{currentData.average}%</p>
         </div>
 
         {/* Peak */}
-        <div className="bg-blue-100 rounded-lg p-4 border border-blue-200">
-          <p className="text-xs font-semibold text-blue-800 uppercase tracking-wide mb-2">Peak</p>
-          <p className="text-2xl font-bold text-blue-950">{currentData.peak}%</p>
+        <div className="rounded-lg p-4 border" style={{ backgroundColor: '#E0F2FE', borderColor: '#B3E5FC' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: '#0A6E8A' }}>Peak</p>
+          <p className="text-2xl font-bold" style={{ color: '#0A6E8A' }}>{currentData.peak}%</p>
         </div>
 
         {/* Growth */}
-        <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
-          <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide mb-2">Growth</p>
-          <p className="text-2xl font-bold text-blue-800">+{currentData.growth}%</p>
+        <div className="rounded-lg p-4 border" style={{ backgroundColor: '#F0FDFA', borderColor: '#E0F2FE' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-2" style={{ color: '#0A6E8A' }}>Growth</p>
+          <p className="text-2xl font-bold" style={{ color: '#0A6E8A' }}>+{currentData.growth}%</p>
         </div>
       </div>
 
@@ -132,10 +134,10 @@ const StudentEngagementTrends: React.FC<StudentEngagementTrendsProps> = ({ data 
               wrapperStyle={{ outline: 'none' }}
             />
 
-            {/* Bars - SOFT MUTED BLUE */}
+            {/* Bars - TEAL */}
             <Bar
               dataKey="engagement"
-              fill="#7c9ed4"
+              fill="#0A6E8A"
               radius={[8, 8, 0, 0]}
               animationDuration={300}
               animationEasing="ease-out"

@@ -9,12 +9,12 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityItem | null>(null);
 
   const getActivityIcon = (type: string) => {
-    const iconProps = { size: 18, className: 'text-blue-600' };
+    const iconProps = { size: 18, className: 'text-[#0A6E8A]' };
     switch (type) {
       case 'submission':
         return <FileText {...iconProps} className="text-green-600" />;
       case 'attendance':
-        return <CheckSquare {...iconProps} className="text-blue-600" />;
+        return <CheckSquare {...iconProps} className="text-[#0A6E8A]" />;
       case 'message':
         return <MessageSquare {...iconProps} className="text-purple-600" />;
       case 'deadline':
@@ -31,7 +31,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
       case 'submission':
         return 'bg-green-50';
       case 'attendance':
-        return 'bg-blue-50';
+        return 'bg-[#0A6E8A]/10';
       case 'message':
         return 'bg-purple-50';
       case 'deadline':
@@ -45,16 +45,17 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
 
   return (
     <>
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-full flex flex-col">
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm h-full flex flex-col">
         {/* Header */}
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">Recent Activity</h2>
-            <p className="text-sm text-gray-600">Latest updates and notifications</p>
+            <h2 className="heading-lg">Recent Activity</h2>
+            <p className="body-text">Latest updates and notifications</p>
           </div>
           <button 
             onClick={() => alert('View All Activities')}
-            className="text-blue-600 hover:text-blue-700 text-sm font-semibold transition-colors"
+            className="font-semibold text-sm transition-colors hover:opacity-90"
+            style={{ color: '#0A6E8A' }}
           >
             View All
           </button>
@@ -70,7 +71,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                 onClick={() => setSelectedActivity(activity)}
                 onMouseEnter={() => setHoveredId(activity.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`w-full text-left border border-gray-200 rounded-xl p-3 transition-all group ${
+                className={`w-full text-left border border-gray-200 rounded-lg p-3 transition-all group ${
                   hoveredId === activity.id
                     ? `${getActivityColor(activity.type)} border-gray-300 shadow-sm`
                     : 'bg-gray-50 hover:bg-gray-100'
@@ -82,7 +83,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+                    <div className="text-sm font-semibold text-gray-900 transition-colors" style={{ color: hoveredId === activity.id ? '#0A6E8A' : undefined }}>
                       {activity.title}
                     </div>
                     <div className="text-xs text-gray-600 line-clamp-2 mt-1">
@@ -110,7 +111,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
 
           <div className="relative w-[92%] max-w-2xl bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-6 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#0A6E8A] to-[#0a5d75] px-8 py-6 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                   {getActivityIcon(selectedActivity.type)}
@@ -158,7 +159,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                     alert(`Action taken on: ${selectedActivity.title}`);
                     setSelectedActivity(null);
                   }}
-                  className="flex-1 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors"
+                  className="flex-1 px-4 py-2.5 bg-[#0A6E8A] hover:bg-[#085a70] text-white font-semibold rounded-lg transition-colors"
                 >
                   Take Action
                 </button>

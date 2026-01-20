@@ -35,20 +35,20 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
       {/* Header Section */}
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h2 className="heading-lg mb-1">{data.title}</h2>
-          <p className="muted-text">{data.subtitle}</p>
+          <h2 className="heading-lg mb-1 text-gray-900">{data.title}</h2>
+          <p className="text-xs text-gray-500 mt-1">{data.subtitle}</p>
         </div>
         <div className="flex items-center gap-5 text-xs">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#1e3a8a]"></div>
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#0A6E8A' }}></div>
             <span className="text-gray-600 font-medium">Attendance</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#3b82f6]"></div>
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#14B8A6' }}></div>
             <span className="text-gray-600 font-medium">Engagement</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#14b8a6]"></div>
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: '#10B981' }}></div>
             <span className="text-gray-600 font-medium">Assignments</span>
           </div>
         </div>

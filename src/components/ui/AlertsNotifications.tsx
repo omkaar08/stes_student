@@ -28,18 +28,21 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
   const getPriorityStyles = (priority: AlertPriority) => {
     const styles = {
       high: {
-        container: 'bg-white hover:border-2 hover:border-blue-900 transition-all duration-300',
-        badge: 'bg-blue-100 text-blue-600 border border-blue-300',
+        container: 'bg-white hover:border-2 transition-all duration-300',
+        borderColor: '#0A6E8A',
+        badge: 'bg-[#0A6E8A]/10 text-[#0A6E8A] border border-[#0A6E8A]/30',
         badgeLabel: 'URGENT',
       },
       medium: {
-        container: 'bg-white hover:border-2 hover:border-blue-900 transition-all duration-300',
-        badge: 'bg-gray-100 text-gray-800 border border-gray-300',
+        container: 'bg-white hover:border-2 transition-all duration-300',
+        borderColor: '#0A6E8A',
+        badge: 'bg-[#0A6E8A]/10 text-[#0A6E8A] border border-[#0A6E8A]/30',
         badgeLabel: 'IMPORTANT',
       },
       low: {
-        container: 'bg-white hover:border-2 hover:border-blue-900 transition-all duration-300',
-        badge: 'bg-gray-100 text-gray-600 border border-gray-300',
+        container: 'bg-white hover:border-2 transition-all duration-300',
+        borderColor: '#0A6E8A',
+        badge: 'bg-[#0A6E8A]/10 text-[#0A6E8A] border border-[#0A6E8A]/30',
         badgeLabel: 'INFO',
       },
     };
@@ -51,23 +54,23 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
     const iconProps = { size: 24 };
     switch (priority) {
       case 'high':
-        return <Phone {...iconProps} className="text-blue-500" />;
+        return <Phone {...iconProps} style={{ color: '#0A6E8A' }} />;
       case 'medium':
-        return <Calendar {...iconProps} className="text-gray-500" />;
+        return <Calendar {...iconProps} style={{ color: '#0A6E8A' }} />;
       case 'low':
-        return <Lightbulb {...iconProps} className="text-blue-500" />;
+        return <Lightbulb {...iconProps} style={{ color: '#0A6E8A' }} />;
       default:
         return <Bell {...iconProps} className="text-gray-500" />;
     }
   };
 
   return (
-    <div className="bg-white border border-gray-300 rounded-2xl p-6 shadow-sm">
+    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
       {/* Header Section */}
       <div className="flex items-start justify-between mb-6">
         <div className="flex items-start gap-3">
           {/* Bell Icon in outlined square */}
-          <div className="flex-shrink-0 w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center">
+          <div className="flex-shrink-0 w-10 h-10 rounded-lg border-2 border-gray-200 flex items-center justify-center">
             <Bell size={20} className="text-gray-600" />
           </div>
           <div>
@@ -78,7 +81,7 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
 
         {/* Count Badge */}
         {data.unreadCount > 0 && (
-          <span className="bg-white border-2 border-gray-300 text-gray-800 text-sm font-bold px-3 py-1 rounded-full">
+          <span className="text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: '#0A6E8A' }}>
             {data.unreadCount} New
           </span>
         )}
@@ -94,11 +97,12 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
             <div
               key={alert.id}
               onClick={() => setSelectedAlertId(alert.id)}
-              className={`${priorityStyles.container} rounded-2xl p-4 cursor-pointer transition-all duration-300 hover:shadow-lg`}
+              className={`${priorityStyles.container} rounded-xl p-4 cursor-pointer transition-all duration-300 hover:shadow-lg`}
+              style={{ borderColor: isSelected ? priorityStyles.borderColor : '#E5E7EB', borderWidth: isSelected ? '2px' : '1px' }}
             >
               <div className="flex gap-4">
                 {/* Icon */}
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${priorityStyles.borderColor}20` }}>
                   {getAlertIcon(alert.priority)}
                 </div>
 
@@ -123,7 +127,7 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
       </div>
 
       {/* View All Button */}
-      <button className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+      <button style={{ backgroundColor: '#0A6E8A' }} className="w-full hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200">
         View All Notifications
       </button>
     </div>

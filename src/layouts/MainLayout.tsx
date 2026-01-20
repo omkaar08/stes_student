@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@/components/common/Header';
 import Sidebar from '@/components/common/Sidebar';
+import Footer from '@/components/common/Footer';
 import { currentUser } from '@/data/dummyData';
 
 interface MainLayoutProps {
@@ -9,12 +10,13 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header user={currentUser} />
-      <div className="flex">
+      <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 ml-64 min-h-[calc(100vh-64px)]">
-          {children}
+        <main className="flex-1 ml-64 min-h-[calc(100vh-64px)] flex flex-col">
+          <div className="flex-1 p-6">{children}</div>
+          <Footer />
         </main>
       </div>
     </div>

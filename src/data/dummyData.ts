@@ -12,6 +12,24 @@ import {
 import { AlertsData } from '@/types/alerts';
 import { EngagementTrendsData } from '@/types/engagement';
 import { dashboardIcons } from '@/data/icons';
+import { Semester } from '@/contexts/AcademicContext';
+
+type DashboardBundle = {
+  dashboardStats: StatCard[];
+  todayClassesData: TodayClassesData;
+  performanceChartData: PerformanceChartData;
+  alertsData: AlertsData;
+  engagementTrendsData: EngagementTrendsData;
+  upcomingExamsData: UpcomingExamsData;
+  todaysMeetingsData: TodaysMeetingsData;
+  markAttendanceData: MarkAttendanceData;
+  leaveManagementData: LeaveManagementData;
+  recentActivityData: RecentActivityData;
+};
+
+// Use a fixed reference time to avoid SSR/CSR mismatches from Date.now()
+const FIXED_TIME = new Date('2026-01-21T10:00:00Z').getTime();
+const isoMinutesAgo = (minutes: number) => new Date(FIXED_TIME - minutes * 60 * 1000).toISOString();
 
 // Dummy user data
 export const currentUser: User = {
@@ -123,7 +141,7 @@ export const alertsData: AlertsData = {
       message:
         'All faculty members are required to attend the emergency meeting scheduled for today at 4:00 PM in Conference Hall A.',
       from: 'Dean of Academics',
-      time: '10 mins ago',
+      time: isoMinutesAgo(10),
       priority: 'high',
       isNew: true,
     },
@@ -133,7 +151,7 @@ export const alertsData: AlertsData = {
       message:
         'Dr Rajesh Kumar from IIT Delhi will deliver a guest lecture on Advanced Machine Learning on Jan 18, 2026 at 2:00 PM.',
       from: 'HOD - Computer Science',
-      time: '1 hour ago',
+      time: isoMinutesAgo(60),
       priority: 'medium',
       isNew: true,
     },
@@ -143,7 +161,7 @@ export const alertsData: AlertsData = {
       message:
         'The final exam schedule has been updated. Please check the academic portal for the revised timetable.',
       from: 'Examination Department',
-      time: '2 hours ago',
+      time: isoMinutesAgo(120),
       priority: 'medium',
       isNew: true,
     },
@@ -153,7 +171,7 @@ export const alertsData: AlertsData = {
       message:
         'Applications for research grants are now open. Submit your proposals by Jan 25, 2026.',
       from: 'Research & Development Cell',
-      time: '5 hours ago',
+      time: isoMinutesAgo(300),
       priority: 'low',
       isNew: false,
     },
@@ -515,4 +533,380 @@ export const recentActivityData: RecentActivityData = {
       timestamp: '2 days ago',
     },
   ],
+};
+
+// Term-specific variants
+const dashboardStatsSpring: StatCard[] = dashboardStats.map((stat) => {
+  if (typeof stat.value === 'number') {
+    return { ...stat, value: (stat.value as number) + 4 };
+  }
+  if (stat.id === 'avg-performance') {
+    return { ...stat, value: '89%' };
+  }
+  return stat;
+});
+
+const dashboardStats2025Fall: StatCard[] = dashboardStats.map((stat) => {
+  if (typeof stat.value === 'number') {
+    return { ...stat, value: (stat.value as number) + 18 };
+  }
+  if (stat.id === 'avg-performance') {
+    return { ...stat, value: '90%' };
+  }
+  return stat;
+});
+
+const dashboardStats2025Spring: StatCard[] = dashboardStats.map((stat) => {
+  if (typeof stat.value === 'number') {
+    return { ...stat, value: (stat.value as number) + 22 };
+  }
+  if (stat.id === 'avg-performance') {
+    return { ...stat, value: '91%' };
+  }
+  return stat;
+});
+
+const todayClassesDataSpring: TodayClassesData = {
+  date: 'Monday, March 9, 2026',
+  totalClasses: 3,
+  classes: [
+    {
+      id: 'class-s1',
+      name: 'Database Systems',
+      code: 'CS310',
+      status: 'ongoing',
+      time: '10:00 AM - 11:30 AM',
+      location: 'Room C-210',
+      studentCount: 40,
+    },
+    {
+      id: 'class-s2',
+      name: 'AI Ethics',
+      code: 'CS380',
+      status: 'completed',
+      time: '08:00 AM - 09:30 AM',
+      location: 'Room B-110',
+      studentCount: 36,
+    },
+    {
+      id: 'class-s3',
+      name: 'Cloud Computing',
+      code: 'CS420',
+      status: 'upcoming',
+      time: '02:00 PM - 03:30 PM',
+      location: 'Online - Teams',
+      studentCount: 44,
+    },
+  ],
+};
+
+const todayClassesData2025Fall: TodayClassesData = {
+  date: 'Tuesday, September 14, 2026',
+  totalClasses: 4,
+  classes: [
+    {
+      id: 'class-f25-1',
+      name: 'Data Visualization',
+      code: 'CS415',
+      status: 'completed',
+      time: '08:00 AM - 09:15 AM',
+      location: 'Room A-102',
+      studentCount: 41,
+    },
+    {
+      id: 'class-f25-2',
+      name: 'Distributed Systems',
+      code: 'CS505',
+      status: 'ongoing',
+      time: '10:00 AM - 11:30 AM',
+      location: 'Room D-201',
+      studentCount: 39,
+    },
+    {
+      id: 'class-f25-3',
+      name: 'Cybersecurity',
+      code: 'CS470',
+      status: 'upcoming',
+      time: '01:00 PM - 02:30 PM',
+      location: 'Lab C-305',
+      studentCount: 45,
+    },
+    {
+      id: 'class-f25-4',
+      name: 'Advanced Databases',
+      code: 'CS520',
+      status: 'upcoming',
+      time: '03:00 PM - 04:30 PM',
+      location: 'Online - Zoom',
+      studentCount: 42,
+    },
+  ],
+};
+
+const todayClassesData2025Spring: TodayClassesData = {
+  date: 'Wednesday, February 18, 2027',
+  totalClasses: 5,
+  classes: [
+    {
+      id: 'class-sp25-1',
+      name: 'Human-Computer Interaction',
+      code: 'CS330',
+      status: 'completed',
+      time: '08:30 AM - 09:30 AM',
+      location: 'Room A-205',
+      studentCount: 38,
+    },
+    {
+      id: 'class-sp25-2',
+      name: 'Software Architecture',
+      code: 'CS410',
+      status: 'completed',
+      time: '10:00 AM - 11:00 AM',
+      location: 'Room B-320',
+      studentCount: 40,
+    },
+    {
+      id: 'class-sp25-3',
+      name: 'Reinforcement Learning',
+      code: 'CS560',
+      status: 'ongoing',
+      time: '11:30 AM - 12:45 PM',
+      location: 'Room C-101',
+      studentCount: 37,
+    },
+    {
+      id: 'class-sp25-4',
+      name: 'Blockchain Systems',
+      code: 'CS535',
+      status: 'upcoming',
+      time: '02:00 PM - 03:15 PM',
+      location: 'Lab D-210',
+      studentCount: 34,
+    },
+    {
+      id: 'class-sp25-5',
+      name: 'Applied NLP',
+      code: 'CS545',
+      status: 'upcoming',
+      time: '03:30 PM - 04:30 PM',
+      location: 'Online - Teams',
+      studentCount: 33,
+    },
+  ],
+};
+
+const performanceChartDataSpring: PerformanceChartData = {
+  ...performanceChartData,
+  title: 'Weekly Performance Trends (Spring)',
+  data: performanceChartData.data.map((point) => ({
+    ...point,
+    attendance: point.attendance + 2,
+    engagement: point.engagement + 1,
+    assignments: point.assignments + 1,
+  })),
+};
+
+const performanceChartData2025Fall: PerformanceChartData = {
+  ...performanceChartData,
+  title: 'Weekly Performance Trends (2025 Fall)',
+  data: performanceChartData.data.map((point) => ({
+    ...point,
+    attendance: Math.min(100, point.attendance + 4),
+    engagement: Math.min(100, point.engagement + 3),
+    assignments: Math.min(100, point.assignments + 2),
+  })),
+};
+
+const performanceChartData2025Spring: PerformanceChartData = {
+  ...performanceChartData,
+  title: 'Weekly Performance Trends (2025 Spring)',
+  data: performanceChartData.data.map((point) => ({
+    ...point,
+    attendance: Math.min(100, point.attendance + 6),
+    engagement: Math.min(100, point.engagement + 4),
+    assignments: Math.min(100, point.assignments + 3),
+  })),
+};
+
+const alertsDataSpring: AlertsData = {
+  unreadCount: 3,
+  alerts: [
+    {
+      id: 'alert-s1',
+      title: 'Spring Orientation Briefing',
+      message: 'Share updated syllabi with students before the semester kickoff meeting.',
+      from: 'Dean of Academics',
+      time: isoMinutesAgo(20),
+      priority: 'medium',
+      isNew: true,
+    },
+    {
+      id: 'alert-s2',
+      title: 'Grade Submission Reminder',
+      message: 'Submit mid-term grades for Spring courses by Friday 5:00 PM.',
+      from: 'Examination Cell',
+      time: isoMinutesAgo(90),
+      priority: 'high',
+      isNew: true,
+    },
+    {
+      id: 'alert-s3',
+      title: 'Guest Seminar - Robotics',
+      message: 'Prof. Aditi Rao will host a seminar on Robotics in Education next week.',
+      from: 'HOD - Mechanical',
+      time: isoMinutesAgo(180),
+      priority: 'low',
+      isNew: false,
+    },
+  ],
+};
+
+const alertsData2025Fall: AlertsData = {
+  unreadCount: 5,
+  alerts: [
+    {
+      id: 'alert-f25-1',
+      title: 'New Research Cohort Launch',
+      message: 'Introduce the 2025 research cohort to your labs this Friday.',
+      from: 'Research & Development Cell',
+      time: isoMinutesAgo(15),
+      priority: 'high',
+      isNew: true,
+    },
+    {
+      id: 'alert-f25-2',
+      title: 'Infrastructure Maintenance',
+      message: 'Network maintenance tonight 9 PM - 11 PM. Save your work beforehand.',
+      from: 'IT Services',
+      time: isoMinutesAgo(50),
+      priority: 'medium',
+      isNew: true,
+    },
+    {
+      id: 'alert-f25-3',
+      title: 'Grant Review Panel',
+      message: 'Panel schedules available for the Fall grant applications. Confirm slots.',
+      from: 'Research & Development Cell',
+      time: isoMinutesAgo(120),
+      priority: 'medium',
+      isNew: true,
+    },
+    {
+      id: 'alert-f25-4',
+      title: 'Faculty Development Workshop',
+      message: 'Sign up for the “Active Learning at Scale” workshop next week.',
+      from: 'Academic Services',
+      time: isoMinutesAgo(240),
+      priority: 'low',
+      isNew: false,
+    },
+    {
+      id: 'alert-f25-5',
+      title: 'Exam Blueprint Update',
+      message: 'Revised blueprint for Fall 2025 exams has been published.',
+      from: 'Examination Department',
+      time: isoMinutesAgo(360),
+      priority: 'high',
+      isNew: false,
+    },
+  ],
+};
+
+const alertsData2025Spring: AlertsData = {
+  unreadCount: 2,
+  alerts: [
+    {
+      id: 'alert-sp25-1',
+      title: 'Capstone Jury Allocation',
+      message: 'Confirm your availability for Spring capstone project juries.',
+      from: 'Department Office',
+      time: isoMinutesAgo(35),
+      priority: 'medium',
+      isNew: true,
+    },
+    {
+      id: 'alert-sp25-2',
+      title: 'Curriculum Review Draft',
+      message: 'Review the proposed 2026 curriculum changes and share feedback.',
+      from: 'Academic Council',
+      time: isoMinutesAgo(120),
+      priority: 'high',
+      isNew: true,
+    },
+    {
+      id: 'alert-sp25-3',
+      title: 'Alumni Networking Evening',
+      message: 'Join the alumni-student mixer scheduled for next Thursday.',
+      from: 'Alumni Office',
+      time: isoMinutesAgo(300),
+      priority: 'low',
+      isNew: false,
+    },
+  ],
+};
+
+const dashboardDataByTerm: Record<string, Record<Semester, DashboardBundle>> = {
+  '2024-2025': {
+    Fall: {
+      dashboardStats,
+      todayClassesData,
+      performanceChartData,
+      alertsData,
+      engagementTrendsData,
+      upcomingExamsData,
+      todaysMeetingsData,
+      markAttendanceData,
+      leaveManagementData,
+      recentActivityData,
+    },
+    Spring: {
+      dashboardStats: dashboardStatsSpring,
+      todayClassesData: todayClassesDataSpring,
+      performanceChartData: performanceChartDataSpring,
+      alertsData: alertsDataSpring,
+      engagementTrendsData,
+      upcomingExamsData,
+      todaysMeetingsData,
+      markAttendanceData,
+      leaveManagementData,
+      recentActivityData,
+    },
+  },
+  '2025-2026': {
+    Fall: {
+      dashboardStats: dashboardStats2025Fall,
+      todayClassesData: todayClassesData2025Fall,
+      performanceChartData: performanceChartData2025Fall,
+      alertsData: alertsData2025Fall,
+      engagementTrendsData,
+      upcomingExamsData,
+      todaysMeetingsData,
+      markAttendanceData,
+      leaveManagementData,
+      recentActivityData,
+    },
+    Spring: {
+      dashboardStats: dashboardStats2025Spring,
+      todayClassesData: todayClassesData2025Spring,
+      performanceChartData: performanceChartData2025Spring,
+      alertsData: alertsData2025Spring,
+      engagementTrendsData,
+      upcomingExamsData,
+      todaysMeetingsData,
+      markAttendanceData,
+      leaveManagementData,
+      recentActivityData,
+    },
+  },
+};
+
+export const getDashboardData = (academicYear: string, semester: Semester): DashboardBundle => {
+  const yearData = dashboardDataByTerm[academicYear];
+  const termData = yearData?.[semester];
+  if (termData) return termData;
+  return dashboardDataByTerm['2024-2025'].Fall;
+};
+
+export const getAlertsDataForTerm = (academicYear: string, semester: Semester): AlertsData => {
+  return getDashboardData(academicYear, semester).alertsData;
 };

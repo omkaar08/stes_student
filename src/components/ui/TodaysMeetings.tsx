@@ -48,38 +48,39 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
   }, [openMeetingId]);
 
   const getMeetingIcon = (icon?: string) => {
-    const common = { size: 18, className: "text-blue-700" };
+    const common = { size: 18 };
     switch (icon) {
       case "faculty":
-        return <Building2 {...common} />;
+        return <Building2 {...common} style={{ color: '#0A6E8A' }} />;
       case "project":
-        return <ClipboardList {...common} />;
+        return <ClipboardList {...common} style={{ color: '#0A6E8A' }} />;
       case "online":
-        return <Video {...common} />;
+        return <Video {...common} style={{ color: '#0A6E8A' }} />;
       default:
-        return <Users {...common} />;
+        return <Users {...common} style={{ color: '#0A6E8A' }} />;
     }
   };
 
   const headerClass =
-    selectedMeeting?.headerVariant === "blue" ? "bg-blue-600" : "bg-[#1e3a8a]";
+    selectedMeeting?.headerVariant === "blue" ? "bg-[#0A6E8A]" : "bg-[#0A6E8A]";
 
   const renderMeetingCard = (meeting: typeof data.meetings[0]) => (
     <button
       key={meeting.id}
       type="button"
       onClick={() => setOpenMeetingId(meeting.id)}
-      className="group w-full text-left bg-white border-2 border-gray-200 rounded-2xl p-4 transition-all hover:border-blue-700 hover:shadow-sm"
+      className="group w-full text-left bg-white border border-gray-200 rounded-lg p-4 transition-all hover:shadow-sm"
+      style={{ borderColor: meeting.id === openMeetingId ? '#0A6E8A' : undefined, borderWidth: meeting.id === openMeetingId ? '2px' : '1px' }}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-4 min-w-0">
-          <div className="w-10 h-10 rounded-xl border-2 border-gray-200 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center flex-shrink-0">
             {getMeetingIcon(meeting.icon)}
           </div>
 
           <div className="min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-bold text-gray-900 text-sm truncate group-hover:text-blue-700 transition-colors">
+              <h3 className="font-bold text-gray-900 text-sm truncate transition-colors" style={{ color: meeting.id === openMeetingId ? '#0A6E8A' : undefined }}>
                 {meeting.title}
               </h3>
             </div>
@@ -109,15 +110,13 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
   return (
     <div className="space-y-6">
       {/* Today's Meetings Section */}
-      <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">
-              Today&apos;s Meetings
-            </h2>
-            <p className="text-sm text-gray-600">Scheduled for today</p>
+            <h2 className="heading-lg">Today&apos;s Meetings</h2>
+            <p className="body-text">Scheduled for today</p>
           </div>
-          <button className="bg-white border border-gray-200 text-gray-900 text-sm font-semibold px-4 py-2 rounded-xl">
+          <button className="bg-white border border-[#0A6E8A]/30 text-[#0A6E8A] text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#0A6E8A]/5 transition-colors">
             {data.meetings.length} Meetings
           </button>
         </div>
@@ -132,12 +131,10 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
         <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
           <div className="flex items-start justify-between mb-5">
             <div>
-              <h2 className="text-lg font-bold text-gray-900">
-                Upcoming Meetings
-              </h2>
-              <p className="text-sm text-gray-600">Next scheduled meetings</p>
+              <h2 className="heading-lg">Upcoming Meetings</h2>
+              <p className="body-text">Next scheduled meetings</p>
             </div>
-            <button className="bg-white border border-gray-200 text-gray-900 text-sm font-semibold px-4 py-2 rounded-xl">
+            <button className="bg-white border border-[#0A6E8A]/30 text-[#0A6E8A] text-sm font-semibold px-4 py-2 rounded-xl hover:bg-[#0A6E8A]/5 transition-colors">
               {Math.min(data.upcomingMeetings.length, 3)} Meetings
             </button>
           </div>
@@ -183,7 +180,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
                 <div className="grid grid-cols-2 gap-5">
                   <div className="bg-white border border-gray-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                      <Clock size={18} className="text-blue-600" />
+                      <Clock size={18} className="text-[#0A6E8A]" />
                       Time
                     </div>
                     <div className="mt-2 text-sm font-extrabold text-gray-900">
@@ -193,7 +190,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
                   <div className="bg-white border border-gray-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                      <Timer size={18} className="text-blue-600" />
+                      <Timer size={18} className="text-[#0A6E8A]" />
                       Duration
                     </div>
                     <div className="mt-2 text-sm font-extrabold text-gray-900">
@@ -203,7 +200,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
                   <div className="bg-white border border-gray-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                      <MapPin size={18} className="text-blue-600" />
+                      <MapPin size={18} className="text-[#0A6E8A]" />
                       Location
                     </div>
                     <div className="mt-2 text-sm font-extrabold text-gray-900">
@@ -213,7 +210,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
                   <div className="bg-white border border-gray-200 rounded-2xl p-5">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                      <Users size={18} className="text-blue-600" />
+                      <Users size={18} className="text-[#0A6E8A]" />
                       Participants
                     </div>
                     <div className="mt-2 text-sm font-extrabold text-gray-900">
@@ -223,16 +220,16 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
                 </div>
 
                 {selectedMeeting.meetingLink && (
-                  <div className="mt-5 border-2 border-blue-700 rounded-2xl p-5">
+                  <div className="mt-5 border-2 border-[#0A6E8A] rounded-2xl p-5">
                     <div className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-                      <Link2 size={18} className="text-blue-700" />
+                      <Link2 size={18} className="text-[#0A6E8A]" />
                       Meeting Link
                     </div>
                     <a
                       href={selectedMeeting.meetingLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-3 block text-blue-600 hover:underline overflow-hidden text-ellipsis whitespace-nowrap"
+                      className="mt-3 block text-[#0A6E8A] hover:underline overflow-hidden text-ellipsis whitespace-nowrap"
                       title={selectedMeeting.meetingLink}
                     >
                       {selectedMeeting.meetingLink}
@@ -241,7 +238,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
                       href={selectedMeeting.meetingLink}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-4 block w-full bg-[#1e3a8a] hover:bg-[#1a3276] text-white font-bold text-center py-3.5 rounded-2xl transition-colors"
+                      className="mt-4 block w-full bg-[#0A6E8A] hover:bg-[#085a70] text-white font-bold text-center py-3.5 rounded-2xl transition-colors"
                     >
                       Join Meeting
                     </a>
@@ -250,7 +247,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
                 <div className="mt-5 bg-white border border-gray-200 rounded-2xl p-5">
                   <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-                    <User size={18} className="text-blue-600" />
+                    <User size={18} className="text-[#0A6E8A]" />
                     Organized by
                   </div>
                   <div className="mt-2 text-sm font-extrabold text-gray-900">
@@ -259,7 +256,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
                 </div>
 
                 <div className="mt-7 flex items-center gap-2 text-gray-900 font-bold">
-                  <ClipboardList size={18} className="text-blue-600" />
+                  <ClipboardList size={18} className="text-[#0A6E8A]" />
                   Agenda
                 </div>
 
@@ -269,7 +266,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
                       key={`${idx}-${item}`}
                       className="bg-white border border-gray-200 rounded-2xl p-5 flex items-center gap-4"
                     >
-                      <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-extrabold flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-[#0A6E8A] text-white font-extrabold flex items-center justify-center flex-shrink-0">
                         {idx + 1}
                       </div>
                       <div className="font-semibold text-gray-900">{item}</div>

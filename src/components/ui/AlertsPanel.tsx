@@ -23,22 +23,22 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ data }) => {
   const getAlertStyles = (type: AlertType) => {
     const styles = {
       urgent: {
-        bg: 'bg-red-50',
-        border: 'border-red-200',
-        tag: 'bg-red-100 text-red-700',
-        icon: 'text-red-600',
+        bg: 'bg-[#0A6E8A]/5',
+        border: 'border-[#0A6E8A]/30',
+        tag: 'bg-[#0A6E8A]/10 text-[#0A6E8A]',
+        icon: 'text-[#0A6E8A]',
       },
       important: {
-        bg: 'bg-orange-50',
-        border: 'border-orange-200',
-        tag: 'bg-orange-100 text-orange-700',
-        icon: 'text-orange-600',
+        bg: 'bg-[#0A6E8A]/5',
+        border: 'border-[#0A6E8A]/30',
+        tag: 'bg-[#0A6E8A]/10 text-[#0A6E8A]',
+        icon: 'text-[#0A6E8A]',
       },
       info: {
-        bg: 'bg-blue-50',
-        border: 'border-blue-200',
-        tag: 'bg-blue-100 text-blue-700',
-        icon: 'text-blue-600',
+        bg: 'bg-[#0A6E8A]/5',
+        border: 'border-[#0A6E8A]/30',
+        tag: 'bg-[#0A6E8A]/10 text-[#0A6E8A]',
+        icon: 'text-[#0A6E8A]',
       },
     };
     return styles[type];
@@ -67,11 +67,13 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ data }) => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 h-full">
+    <div className="bg-white border border-gray-200 rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Alerts & Notifications</h2>
+        <div className="border-l-4 pl-3" style={{ borderLeftColor: '#0A6E8A' }}>
+          <h2 className="text-xl font-bold text-gray-900">Alerts & Notifications</h2>
+        </div>
         {data.newCount > 0 && (
-          <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <span className="text-white text-xs font-bold px-2 py-1 rounded-full" style={{ backgroundColor: '#0A6E8A' }}>
             {data.newCount} New
           </span>
         )}
@@ -95,7 +97,7 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ data }) => {
                       {alert.title}
                     </h3>
                     {alert.isNew && (
-                      <span className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 mt-1"></span>
+                      <span className="w-2 h-2 bg-[#0A6E8A] rounded-full flex-shrink-0 mt-1"></span>
                     )}
                   </div>
                   <p className="text-xs text-gray-600 mb-2 line-clamp-2">

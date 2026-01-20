@@ -125,14 +125,15 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={markAllPresent}
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2.5 rounded-xl flex items-center gap-2 transition-colors"
+            className="hover:opacity-90 text-white font-semibold px-5 py-2.5 rounded-lg flex items-center gap-2 transition-all"
+            style={{ backgroundColor: '#0A6E8A' }}
           >
             <UserCheck size={18} />
             Mark All Present
           </button>
           <button
             onClick={reset}
-            className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold px-5 py-2.5 rounded-xl transition-colors"
+            className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-900 font-semibold px-5 py-2.5 rounded-lg transition-colors"
           >
             Reset
           </button>
@@ -141,16 +142,16 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
 
       {/* Class Selector */}
       <div className="relative mb-6">
-        <div className="border-2 border-blue-700 rounded-2xl p-4">
+        <div className="rounded-xl p-4 border-2" style={{ borderColor: '#0A6E8A' }}>
           <button
             type="button"
             onClick={() => setIsOpen((v) => !v)}
             className="w-full flex items-center justify-between gap-4"
           >
             <div className="flex items-center gap-4 min-w-0">
-              <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center flex-shrink-0">
+              <div className="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 text-white" style={{ backgroundColor: '#0A6E8A' }}>
                 <svg
-                  className="w-7 h-7 text-white"
+                  className="w-7 h-7"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -179,13 +180,14 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
 
             <ChevronDown
               size={18}
-              className={`text-blue-700 transition-transform ${isOpen ? "rotate-180" : ""}`}
+              style={{ color: '#0A6E8A' }}
+              className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
             />
           </button>
         </div>
 
         {isOpen && (
-          <div className="absolute left-0 right-0 mt-3 bg-white border border-gray-200 rounded-2xl shadow-xl overflow-hidden z-20">
+          <div className="absolute left-0 right-0 mt-3 bg-white border border-gray-200 rounded-lg shadow-xl overflow-hidden z-20">
             {data.classes.map((cls, index) => {
               const isSelected = cls.id === selectedClassId;
 
@@ -203,11 +205,12 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
                   <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-4 min-w-0">
                       <div
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+                        className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 ${
                           isSelected
-                            ? "bg-blue-600 text-white"
+                            ? "text-white"
                             : "bg-white border border-gray-200 text-gray-900"
                         }`}
+                        style={isSelected ? { backgroundColor: '#0A6E8A' } : {}}
                       >
                         <svg
                           className={`w-6 h-6 ${isSelected ? "text-white" : "text-gray-900"}`}
@@ -237,7 +240,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
                     {isSelected ? (
                       <Check
                         size={20}
-                        className="text-blue-700 flex-shrink-0"
+                        style={{ color: '#0A6E8A' }}
                       />
                     ) : (
                       <span className="w-5" />
@@ -255,7 +258,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="text-xs text-gray-600 font-semibold mb-2 flex items-center gap-2">
             <svg
-              className="w-5 h-5 text-blue-600"
+              className="w-5 h-5 text-[#0A6E8A]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -274,10 +277,10 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
 
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="text-xs text-gray-600 font-semibold mb-2 flex items-center gap-2">
-            <UserCheck size={18} className="text-green-600" />
+            <UserCheck size={18} className="text-[#0A6E8A]" />
             Present
           </div>
-          <div className="text-3xl font-extrabold text-green-600">
+          <div className="text-3xl font-extrabold text-[#0A6E8A]">
             {present}
           </div>
         </div>
@@ -293,7 +296,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <div className="text-xs text-gray-600 font-semibold mb-2 flex items-center gap-2">
             <svg
-              className="w-5 h-5 text-blue-600"
+              className="w-5 h-5 text-[#0A6E8A]"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -336,17 +339,17 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
 
           const cardBorder =
             current === "present"
-              ? "border-green-500"
+              ? "border-[#0A6E8A]"
               : current === "absent"
                 ? "border-red-500"
                 : "border-gray-200";
 
           const avatarBg =
             current === "present"
-              ? "bg-green-500"
+              ? "bg-[#0A6E8A]"
               : current === "absent"
                 ? "bg-red-500"
-                : "bg-blue-600";
+                : "bg-[#0A6E8A]";
 
           return (
             <div
@@ -356,8 +359,8 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
               {/* Corner status indicator */}
               {current && (
                 <div
-                  className={`absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center border-4 border-white ${
-                    current === "present" ? "bg-green-500" : "bg-red-500"
+                    className={`absolute -top-3 -right-3 w-8 h-8 rounded-full flex items-center justify-center border-4 border-white ${
+                    current === "present" ? "bg-[#0A6E8A]" : "bg-red-500"
                   }`}
                 >
                   {current === "present" ? (
@@ -390,8 +393,8 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
                   onClick={() => setStudentStatus(student.id, "present")}
                   className={`w-12 h-12 rounded-2xl border flex items-center justify-center transition-colors ${
                     current === "present"
-                      ? "bg-green-500 border-green-500 text-white"
-                      : "bg-white border-gray-200 text-green-600 hover:bg-gray-50"
+                      ? "bg-[#0A6E8A] border-[#0A6E8A] text-white"
+                      : "bg-white border-gray-200 text-[#0A6E8A] hover:bg-gray-50"
                   }`}
                   aria-label="Mark present"
                 >
@@ -422,8 +425,8 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
         disabled={total === 0 || marked < total}
         className={`mt-6 w-full rounded-2xl py-4 px-6 font-bold text-white flex items-center justify-center gap-3 transition-colors ${
           marked === total && total > 0
-            ? "bg-blue-600 hover:bg-blue-700"
-            : "bg-blue-300 cursor-not-allowed"
+            ? "bg-[#0A6E8A] hover:bg-[#085a70]"
+            : "bg-[#0A6E8A]/40 cursor-not-allowed"
         }`}
       >
         <BadgeCheck size={18} />
