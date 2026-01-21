@@ -73,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
             </button>
             {isExpanded && (
               <div className="mt-1 ml-3 pl-3 border-l border-gray-200 space-y-1">
-                {item.children.map((child) => renderNavItem(child, level + 1))}
+                {item.children?.map((child) => renderNavItem(child, level + 1))}
               </div>
             )}
           </div>
