@@ -6,11 +6,11 @@ import { HeaderProps } from '@/types';
 import SearchBar from '@/components/ui/SearchBar';
 import IconButton from '@/components/ui/IconButton';
 import Avatar from '@/components/ui/Avatar';
-import { User, Settings, HelpCircle, LogOut, Eye, EyeOff, X } from 'lucide-react';
+import { User, Settings, HelpCircle, LogOut, Eye, EyeOff, X, Menu } from 'lucide-react';
 import { getAlertsDataForTerm } from '@/data/dummyData';
 import { useAcademicContext } from '@/contexts/AcademicContext';
 
-const Header: React.FC<HeaderProps> = ({ user: initialUser }) => {
+const Header: React.FC<HeaderProps> = ({ user: initialUser, onToggleSidebar }) => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState(false);
@@ -194,8 +194,16 @@ const Header: React.FC<HeaderProps> = ({ user: initialUser }) => {
           py-2.5
           gap-4
         ">
-          {/* Left Section - Logo */}
+          {/* Left Section - Hamburger + Logo */}
           <div className="flex items-center gap-3 shrink-0">
+            {/* Hamburger Menu Button - Only visible on mobile/tablet */}
+            <button
+              onClick={onToggleSidebar}
+              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <Menu className="w-6 h-6" style={{ color: '#0A6E8A' }} />
+            </button>
             <Image
               src="/images/ur-logo.jpeg"
               alt="University of Rwanda"

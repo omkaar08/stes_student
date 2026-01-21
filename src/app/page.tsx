@@ -12,7 +12,8 @@ import MarkAttendance from '@/components/ui/MarkAttendance';
 import TodaysMeetings from '@/components/ui/TodaysMeetings';
 import LeaveManagement from '@/components/ui/LeaveManagement';
 import RecentActivity from '@/components/ui/RecentActivity';
-import { getDashboardData } from '@/data/dummyData';
+import WelcomeSection from '@/components/ui/WelcomeSection';
+import { getDashboardData, currentUser } from '@/data/dummyData';
 import { useAcademicContext } from '@/contexts/AcademicContext';
 
 export default function HomePage() {
@@ -33,6 +34,9 @@ export default function HomePage() {
   return (
     <MainLayout>
       <div className="w-full">
+        {/* Welcome Section */}
+        <WelcomeSection userName={currentUser.name} employeeId={currentUser.id} />
+        
         {/* Stats Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8 px-6 py-8">
           {dashboardStats.map((stat) => (

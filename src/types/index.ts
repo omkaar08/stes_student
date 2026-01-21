@@ -29,6 +29,13 @@ export interface SearchResult {
 // Component props types
 export interface HeaderProps {
   user?: User;
+  onToggleSidebar?: () => void;
+}
+
+export interface SidebarProps {
+  className?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 export interface AvatarProps {

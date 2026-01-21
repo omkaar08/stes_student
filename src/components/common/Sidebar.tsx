@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { SidebarProps, NavItem } from '@/types';
 import { navigationItems } from '@/data/navigationData';
+import { X } from 'lucide-react';
 
-const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
+const Sidebar: React.FC<SidebarProps> = ({ className = '', isOpen = false, onClose }) => {
   const pathname = usePathname();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
@@ -107,27 +108,52 @@ const Sidebar: React.FC<SidebarProps> = ({ className = '' }) => {
   };
 
   return (
-    <aside className={`
-      w-64
-      bg-white
-      h-[calc(100vh-64px)]
-      fixed
-      left-0
-      top-[64px]
-      overflow-y-auto
-      [&::-webkit-scrollbar]:hidden
-      [-ms-overflow-style:none]
-      [scrollbar-width:none]
-      px-4
-      py-6
-      border-r
-      border-gray-100
-      ${className}
-    `}>
-      <nav className="space-y-2">
-        {navigationItems.map((item) => renderNavItem(item))}
-      </nav>
-    </aside>
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`
+        fixed
+        left-0
+        top-[64px]
+        w-72 sm:w-80 lg:w-64
+        h-[calc(100vh-64px)]
+        bg-white
+        overflow-y-auto
+        [&::-webkit-scrollbar]:hidden
+        [-ms-overflow-style:none]
+        [scrollbar-width:none]
+        px-4
+        py-6
+        border-r
+        border-gray-100
+        z-40
+        transform transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        ${className}
+      `}>
+        {/* Close button for mobile */}
+        <div className="lg:hidden flex justify-end mb-4">
+          <button
+            onClick={onClose}
+            className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+
+        <nav className="space-y-2">
+          {navigationItems.map((item) => renderNavItem(item))}
+        </nav>
+      </aside>
+    </>
   );
 };
 
