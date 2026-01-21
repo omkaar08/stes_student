@@ -209,3 +209,54 @@ export interface RecentActivityData {
 export interface RecentActivityProps {
   data: RecentActivityData;
 }
+
+// Mark Attendance types
+export type AttendanceStatus = 'present' | 'absent';
+
+export interface AttendanceStudent {
+  id: string;
+  name: string;
+  rollNumber: string;
+  initials: string;
+}
+
+export interface AttendanceClass {
+  id: string;
+  label: string;
+  meta: string;
+  students: AttendanceStudent[];
+}
+
+export interface MarkAttendanceData {
+  classes: AttendanceClass[];
+}
+
+export interface MarkAttendanceProps {
+  data: MarkAttendanceData;
+}
+
+// Upcoming Exams types
+export interface UpcomingExam {
+  id: string;
+  day: number;
+  month: string;
+  title: string;
+  courseCode: string;
+  time: string;
+  dateLabel: string;
+  room: string;
+  duration: string;
+  totalMarks: number;
+  topicsCovered: string[];
+  instructions: string;
+  enrolledStudents: number;
+}
+
+export interface UpcomingExamsData {
+  total: number;
+  exams: UpcomingExam[];
+}
+
+export interface UpcomingExamsProps {
+  data: UpcomingExamsData;
+}
