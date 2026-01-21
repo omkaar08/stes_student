@@ -12,10 +12,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Header user={currentUser} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 ml-64 min-h-[calc(100vh-64px)] flex flex-col">
-          <div className="flex-1 p-6">{children}</div>
+        <main className="flex-1 ml-64 min-h-[calc(100vh-64px)] flex flex-col overflow-x-hidden">
+          <div className="flex-1 overflow-y-auto">{children}</div>
           <Footer />
         </main>
       </div>

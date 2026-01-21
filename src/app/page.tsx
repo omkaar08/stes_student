@@ -32,9 +32,9 @@ export default function HomePage() {
 
   return (
     <MainLayout>
-      <div className="p-8 w-full">
+      <div className="w-full">
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-8 px-6 py-8">
           {dashboardStats.map((stat) => (
             <StatCard
               key={stat.id}
@@ -47,11 +47,13 @@ export default function HomePage() {
         </div>
 
         {/* Today's Classes Section */}
-        <TodayClasses data={todayClassesData} />
+        <div className="px-6 mb-8">
+          <TodayClasses data={todayClassesData} />
+        </div>
 
         {/* Performance Chart & Alerts Section - 70% + 30% layout */}
-        <div className="mt-8 grid grid-cols-12 gap-6">
-          <div className="col-span-12 lg:col-span-8">
+        <div className="flex flex-col lg:flex-row gap-6 px-6">
+          <div className="w-full lg:w-[66.666%]">
             <PerformanceChart data={performanceChartData} />
 
             {/* Student Engagement Trends Section - Same spacing as column gap */}
@@ -63,7 +65,7 @@ export default function HomePage() {
               <MarkAttendance data={markAttendanceData} />
             </div>
           </div>
-          <div className="col-span-12 lg:col-span-4">
+          <div className="w-full lg:w-[33.333%]">
             <div className="space-y-6">
               <AlertsNotifications data={alertsData} />
               <UpcomingExams data={upcomingExamsData} />
@@ -73,9 +75,13 @@ export default function HomePage() {
         </div>
 
         {/* Leave Management & Recent Activity Section - 50% + 50% layout */}
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <LeaveManagement data={leaveManagementData} />
-          <RecentActivity data={recentActivityData} />
+        <div className="mt-8 flex flex-col lg:flex-row gap-6 px-6 pb-8">
+          <div className="w-full lg:w-1/2">
+            <LeaveManagement data={leaveManagementData} />
+          </div>
+          <div className="w-full lg:w-1/2">
+            <RecentActivity data={recentActivityData} />
+          </div>
         </div>
       </div>
     </MainLayout>

@@ -332,7 +332,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
       </div>
 
       {/* Students */}
-      <div className="grid grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredStudents.map((student) => {
           const key = `${selectedClass?.id}:${student.id}`;
           const current = attendance[key];
