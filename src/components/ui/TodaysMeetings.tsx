@@ -51,26 +51,29 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
     const common = { size: 18 };
     switch (icon) {
       case "faculty":
-        return <Building2 {...common} style={{ color: '#0A6E8A' }} />;
+        return <Building2 {...common} style={{ color: "#0A6E8A" }} />;
       case "project":
-        return <ClipboardList {...common} style={{ color: '#0A6E8A' }} />;
+        return <ClipboardList {...common} style={{ color: "#0A6E8A" }} />;
       case "online":
-        return <Video {...common} style={{ color: '#0A6E8A' }} />;
+        return <Video {...common} style={{ color: "#0A6E8A" }} />;
       default:
-        return <Users {...common} style={{ color: '#0A6E8A' }} />;
+        return <Users {...common} style={{ color: "#0A6E8A" }} />;
     }
   };
 
   const headerClass =
     selectedMeeting?.headerVariant === "blue" ? "bg-[#0A6E8A]" : "bg-[#0A6E8A]";
 
-  const renderMeetingCard = (meeting: typeof data.meetings[0]) => (
+  const renderMeetingCard = (meeting: (typeof data.meetings)[0]) => (
     <button
       key={meeting.id}
       type="button"
       onClick={() => setOpenMeetingId(meeting.id)}
       className="group w-full text-left bg-white border border-gray-200 rounded-lg p-4 transition-all hover:shadow-sm"
-      style={{ borderColor: meeting.id === openMeetingId ? '#0A6E8A' : undefined, borderWidth: meeting.id === openMeetingId ? '2px' : '1px' }}
+      style={{
+        borderColor: meeting.id === openMeetingId ? "#0A6E8A" : undefined,
+        borderWidth: meeting.id === openMeetingId ? "2px" : "1px",
+      }}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-4 min-w-0">
@@ -80,7 +83,12 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
           <div className="min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-bold text-gray-900 text-sm truncate transition-colors" style={{ color: meeting.id === openMeetingId ? '#0A6E8A' : undefined }}>
+              <h3
+                className="font-bold text-gray-900 text-sm truncate transition-colors"
+                style={{
+                  color: meeting.id === openMeetingId ? "#0A6E8A" : undefined,
+                }}
+              >
                 {meeting.title}
               </h3>
             </div>
@@ -109,11 +117,11 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
 
   return (
     <div className="space-y-6">
-      {/* Today's Meetings Section */}
+      {/* Upcoming Meetings Section */}
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <div className="flex items-start justify-between mb-5">
           <div>
-            <h2 className="heading-lg">Today&apos;s Meetings</h2>
+            <h2 className="heading-lg">Upcoming Meetings</h2>
             <p className="body-text">Scheduled for today</p>
           </div>
           <button className="bg-white border border-primary-200 text-primary-500 text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary-50 transition-colors">
@@ -125,8 +133,6 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
           {data.meetings.map((meeting) => renderMeetingCard(meeting))}
         </div>
       </div>
-
-
 
       {/* Meeting Details Modal */}
       {selectedMeeting && (

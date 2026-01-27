@@ -1,25 +1,34 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { RecentActivityProps, ActivityItem } from '@/types';
-import { FileText, CheckSquare, MessageSquare, AlertCircle, CheckCircle2, X } from 'lucide-react';
+import React, { useState } from "react";
+import { RecentActivityProps, ActivityItem } from "@/types";
+import {
+  FileText,
+  CheckSquare,
+  MessageSquare,
+  AlertCircle,
+  CheckCircle2,
+  X,
+} from "lucide-react";
 
 const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [selectedActivity, setSelectedActivity] = useState<ActivityItem | null>(null);
+  const [selectedActivity, setSelectedActivity] = useState<ActivityItem | null>(
+    null,
+  );
 
   const getActivityIcon = (type: string) => {
-    const iconProps = { size: 18, className: 'text-primary-500' };
+    const iconProps = { size: 18, className: "text-primary-500" };
     switch (type) {
-      case 'submission':
+      case "submission":
         return <FileText {...iconProps} className="text-green-600" />;
-      case 'attendance':
+      case "attendance":
         return <CheckSquare {...iconProps} className="text-primary-500" />;
-      case 'message':
+      case "message":
         return <MessageSquare {...iconProps} className="text-purple-600" />;
-      case 'deadline':
+      case "deadline":
         return <AlertCircle {...iconProps} className="text-orange-600" />;
-      case 'grading':
+      case "grading":
         return <CheckCircle2 {...iconProps} className="text-green-600" />;
       default:
         return <FileText {...iconProps} />;
@@ -28,18 +37,18 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
 
   const getActivityColor = (type: string) => {
     switch (type) {
-      case 'submission':
-        return 'bg-green-50';
-      case 'attendance':
-        return 'bg-primary-50';
-      case 'message':
-        return 'bg-purple-50';
-      case 'deadline':
-        return 'bg-orange-50';
-      case 'grading':
-        return 'bg-green-50';
+      case "submission":
+        return "bg-green-50";
+      case "attendance":
+        return "bg-primary-50";
+      case "message":
+        return "bg-purple-50";
+      case "deadline":
+        return "bg-orange-50";
+      case "grading":
+        return "bg-green-50";
       default:
-        return 'bg-gray-50';
+        return "bg-gray-50";
     }
   };
 
@@ -54,8 +63,8 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
             <h2 className="heading-lg">Recent Activity</h2>
             <p className="body-text">Latest updates and notifications</p>
           </div>
-          <button 
-            onClick={() => alert('View All Activities')}
+          <button
+            onClick={() => alert("View All Activities")}
             className="font-semibold text-sm text-primary-500 hover:text-primary-600 transition-colors"
           >
             View All
@@ -75,7 +84,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                 className={`w-full text-left border border-gray-200 rounded-lg p-3 transition-all group ${
                   hoveredId === activity.id
                     ? `${getActivityColor(activity.type)} border-gray-300 shadow-sm`
-                    : 'bg-gray-50 hover:bg-gray-100'
+                    : "bg-gray-50 hover:bg-gray-100"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -87,11 +96,14 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                     <div className="text-sm font-semibold text-gray-900 transition-colors group-hover:text-primary-500">
                       {activity.title}
                     </div>
-                    <div className="text-xs text-gray-600 line-clamp-2 mt-1">
-                      {activity.description}
-                    </div>
-                    <div className="text-xs text-gray-500 mt-2">
-                      {activity.timestamp}
+                    <div className="mt-1 flex items-center gap-2 text-xs">
+                      <span className="text-gray-600 flex-1 min-w-0 truncate">
+                        {activity.description}
+                      </span>
+                      <span className="text-gray-400">-</span>
+                      <span className="text-gray-500 whitespace-nowrap">
+                        {activity.timestamp}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -117,7 +129,9 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                   {getActivityIcon(selectedActivity.type)}
                 </div>
-                <h2 className="text-2xl font-bold text-white">{selectedActivity.title}</h2>
+                <h2 className="text-2xl font-bold text-white">
+                  {selectedActivity.title}
+                </h2>
               </div>
               <button
                 type="button"
@@ -132,18 +146,30 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
             <div className="p-8">
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-                  <div className="text-xs font-semibold text-gray-600 mb-2">Activity Type</div>
-                  <div className="text-lg font-bold text-gray-900 capitalize">{selectedActivity.type}</div>
+                  <div className="text-xs font-semibold text-gray-600 mb-2">
+                    Activity Type
+                  </div>
+                  <div className="text-lg font-bold text-gray-900 capitalize">
+                    {selectedActivity.type}
+                  </div>
                 </div>
                 <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-                  <div className="text-xs font-semibold text-gray-600 mb-2">Time</div>
-                  <div className="text-lg font-bold text-gray-900">{selectedActivity.timestamp}</div>
+                  <div className="text-xs font-semibold text-gray-600 mb-2">
+                    Time
+                  </div>
+                  <div className="text-lg font-bold text-gray-900">
+                    {selectedActivity.timestamp}
+                  </div>
                 </div>
               </div>
 
               <div className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-                <div className="text-xs font-semibold text-gray-600 mb-3">Details</div>
-                <div className="text-sm text-gray-900 leading-relaxed">{selectedActivity.description}</div>
+                <div className="text-xs font-semibold text-gray-600 mb-3">
+                  Details
+                </div>
+                <div className="text-sm text-gray-900 leading-relaxed">
+                  {selectedActivity.description}
+                </div>
               </div>
 
               <div className="mt-8 flex gap-3">

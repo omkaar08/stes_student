@@ -46,30 +46,30 @@ export const currentUser: User = {
 export const dashboardStats: StatCard[] = [
   {
     id: "total-students",
-    title: "Total Students",
+    title: "Students",
     value: 234,
-    change: { value: 12, isPositive: true },
+    change: { text: "+12% from last semester", variant: "positive" },
     icon: dashboardIcons.totalStudents,
   },
   {
     id: "active-courses",
     title: "Active Courses",
     value: 8,
-    change: { value: 2, isPositive: true },
+    change: { text: "+2.1% from last week", variant: "positive" },
     icon: dashboardIcons.activeCourses,
   },
   {
     id: "pending-tasks",
     title: "Pending Tasks",
     value: 15,
-    change: { value: -5, isPositive: false },
+    change: { text: "5 high priority", variant: "warning" },
     icon: dashboardIcons.pendingTasks,
   },
   {
     id: "avg-performance",
     title: "Avg. Performance",
     value: "87%",
-    change: { value: 3, isPositive: true },
+    change: { text: "+1.2% from last week", variant: "positive" },
     icon: dashboardIcons.avgPerformance,
   },
 ];

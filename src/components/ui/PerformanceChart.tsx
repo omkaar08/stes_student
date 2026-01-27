@@ -48,14 +48,16 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
+    <div className="h-full flex flex-col p-4">
       {/* Header Section */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex items-start justify-between gap-4 mb-3">
         <div>
-          <h2 className="heading-lg mb-1 text-gray-900">{data.title}</h2>
+          <h2 className="text-lg font-bold text-gray-900 leading-tight">
+            {data.title}
+          </h2>
           <p className="text-xs text-gray-500 mt-1">{data.subtitle}</p>
         </div>
-        <div className="flex items-center gap-5 text-xs">
+        <div className="hidden sm:flex items-center gap-4 text-xs">
           <div className="flex items-center gap-2">
             <div
               className="w-3 h-3 rounded-full"
@@ -81,11 +83,11 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
       </div>
 
       {/* Chart Section */}
-      <div className="w-full flex-1 min-h-[280px]">
+      <div className="w-full flex-1 min-h-[220px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data.data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 5 }}
+            margin={{ top: 8, right: 18, left: 0, bottom: 0 }}
           >
             {/* Clean horizontal grid lines only */}
             <CartesianGrid
@@ -100,8 +102,8 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 13, fill: "#6b7280", fontWeight: 500 }}
-              dy={12}
+              tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }}
+              dy={10}
               interval={0}
             />
 

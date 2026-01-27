@@ -1,24 +1,28 @@
 "use client";
 
-import { useMemo } from 'react';
-import MainLayout from '@/layouts/MainLayout';
-import StatCard from '@/components/ui/StatCard';
-import TodayClasses from '@/components/ui/TodayClasses';
-import QuickActions from '@/components/ui/QuickActions';
-import PerformanceChart from '@/components/ui/PerformanceChart';
-import StudentEngagementTrends from '@/components/ui/StudentEngagementTrends';
-import UpcomingExams from '@/components/ui/UpcomingExams';
-import TodaysMeetings from '@/components/ui/TodaysMeetings';
-import RecentActivity from '@/components/ui/RecentActivity';
-import WelcomeSection from '@/components/ui/WelcomeSection';
-import { getDashboardData, currentUser, getTimetableSessions } from '@/data/dummyData';
-import { useAcademicContext } from '@/contexts/AcademicContext';
+import { useMemo } from "react";
+import MainLayout from "@/layouts/MainLayout";
+import StatCard from "@/components/ui/StatCard";
+import TodayClasses from "@/components/ui/TodayClasses";
+import QuickActions from "@/components/ui/QuickActions";
+import PerformanceChart from "@/components/ui/PerformanceChart";
+import StudentEngagementTrends from "@/components/ui/StudentEngagementTrends";
+import UpcomingExams from "@/components/ui/UpcomingExams";
+import TodaysMeetings from "@/components/ui/TodaysMeetings";
+import RecentActivity from "@/components/ui/RecentActivity";
+import WelcomeSection from "@/components/ui/WelcomeSection";
+import {
+  getDashboardData,
+  currentUser,
+  getTimetableSessions,
+} from "@/data/dummyData";
+import { useAcademicContext } from "@/contexts/AcademicContext";
 import {
   getTodaySessions,
   convertSessionToClassCard,
   getFormattedTodayDate,
   type TimetableSession,
-} from '@/utils/timetableSync';
+} from "@/utils/timetableSync";
 
 export default function HomePage() {
   const { academicYear, semester } = useAcademicContext();
@@ -30,7 +34,10 @@ export default function HomePage() {
     upcomingExamsData,
     todaysMeetingsData,
     recentActivityData,
-  } = useMemo(() => getDashboardData(academicYear, semester), [academicYear, semester]);
+  } = useMemo(
+    () => getDashboardData(academicYear, semester),
+    [academicYear, semester],
+  );
 
   // Sync today's schedule with timetable data
   const todayClassesData = useMemo(() => {
@@ -38,7 +45,7 @@ export default function HomePage() {
     const todaySessions = getTodaySessions(allTimetableSessions);
 
     const classes = todaySessions.map((session) =>
-      convertSessionToClassCard(session, session.slotIndex)
+      convertSessionToClassCard(session, session.slotIndex),
     );
 
     return {
@@ -52,8 +59,11 @@ export default function HomePage() {
     <MainLayout>
       <div className="w-full min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100">
         {/* Welcome Section */}
-        <WelcomeSection userName={currentUser.name} employeeId={currentUser.id} />
-        
+        <WelcomeSection
+          userName={currentUser.name}
+          employeeId={currentUser.id}
+        />
+
         {/* Stats Section - Professional Grid */}
         <div className="px-6 py-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
@@ -88,11 +98,11 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-3 items-stretch">
             {/* Left Column - Performance Chart (2 cols) */}
             <div className="lg:col-span-2 flex flex-col space-y-3 h-full">
-              <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="h-[360px] md:h-[380px] bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
                 <PerformanceChart data={performanceChartData} />
               </div>
 
-              <div className="flex-1 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
+              <div className="h-[360px] md:h-[380px] bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300">
                 <StudentEngagementTrends data={engagementTrendsData} />
               </div>
             </div>

@@ -105,8 +105,10 @@ export interface StatCard {
   value: string | number;
   icon: React.ReactNode;
   change?: {
-    value: number;
-    isPositive: boolean;
+    value?: number;
+    isPositive?: boolean;
+    text?: string;
+    variant?: "positive" | "negative" | "warning" | "neutral";
   };
 }
 
@@ -135,8 +137,10 @@ export interface StatCardProps {
   value: string | number;
   icon: React.ReactNode;
   change?: {
-    value: number;
-    isPositive: boolean;
+    value?: number;
+    isPositive?: boolean;
+    text?: string;
+    variant?: "positive" | "negative" | "warning" | "neutral";
   };
 }
 
