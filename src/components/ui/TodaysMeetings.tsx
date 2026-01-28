@@ -62,70 +62,68 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
   };
 
   const headerClass =
-    selectedMeeting?.headerVariant === "blue" ? "bg-[#024698]" : "bg-[#024698]";
+    selectedMeeting?.headerVariant === "blue" ? "bg-[#026892]" : "bg-[#026892]";
 
   const renderMeetingCard = (meeting: (typeof data.meetings)[0]) => (
     <button
       key={meeting.id}
       type="button"
       onClick={() => setOpenMeetingId(meeting.id)}
-      className="group w-full text-left bg-gray-50 border border-gray-200 rounded-lg p-3 transition-all hover:bg-gray-100"
+      className="group w-full text-left bg-gray-50 border border-gray-200 rounded-lg px-3 py-2.5 transition-all hover:bg-gray-100"
       style={{
-        borderColor: meeting.id === openMeetingId ? "#024698" : undefined,
+        borderColor: meeting.id === openMeetingId ? "#026892" : undefined,
         borderWidth: meeting.id === openMeetingId ? "2px" : "1px",
       }}
     >
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center flex-shrink-0">
+        <div className="flex items-start gap-2.5 min-w-0 flex-1">
+          <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center flex-shrink-0">
             {getMeetingIcon(meeting.icon)}
           </div>
 
-          <div className="min-w-0">
-            <div className="flex items-center justify-between gap-2">
-              <h3
-                className="font-bold text-gray-900 text-sm truncate transition-colors"
-                style={{
-                  color: meeting.id === openMeetingId ? "#024698" : undefined,
-                }}
-              >
-                {meeting.title}
-              </h3>
-            </div>
+          <div className="min-w-0 flex-1">
+            <h3
+              className="font-medium text-gray-900 text-sm truncate transition-colors mb-1"
+              style={{
+                color: meeting.id === openMeetingId ? "#026892" : undefined,
+              }}
+            >
+              {meeting.title}
+            </h3>
 
-            <div className="mt-2 space-y-1.5 text-xs text-gray-700">
-              <div className="flex items-center gap-2">
-                <Clock size={14} className="text-gray-500" />
+            <div className="space-y-0.5 text-xs text-gray-600">
+              <div className="flex items-center gap-1.5">
+                <Clock size={12} className="text-gray-500 flex-shrink-0" />
                 <span>{meeting.time}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin size={14} className="text-gray-500" />
+              <div className="flex items-center gap-1.5">
+                <MapPin size={12} className="text-gray-500 flex-shrink-0" />
                 <span className="truncate">{meeting.location}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <ChevronRight size={18} className="text-gray-400 flex-shrink-0" />
+        <ChevronRight size={16} className="text-gray-400 flex-shrink-0" />
       </div>
     </button>
   );
 
   return (
-    <div className="space-y-4">
-      {/* Upcoming Meetings Section */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
-        <div className="flex items-start justify-between mb-4">
+    <>
+      {/* Single Parent Card Container */}
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-[280px] flex flex-col">
+        <div className="flex items-start justify-between mb-2.5">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Upcoming Meetings</h2>
-            <p className="text-xs text-gray-600">Scheduled for today</p>
+            <h2 className="text-lg font-bold text-gray-900">Upcoming Meetings</h2>
           </div>
-          <button className="bg-white border border-primary-200 text-primary-500 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-primary-50 transition-colors">
+          <button className="bg-white border border-gray-200 text-gray-900 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
             {data.meetings.length} Meetings
           </button>
         </div>
 
-        <div className="space-y-4">
+        {/* Meeting Items Container */}
+        <div className="space-y-2 flex-1 overflow-y-auto">
           {data.meetings.map((meeting) => renderMeetingCard(meeting))}
         </div>
       </div>
@@ -263,7 +261,7 @@ const TodaysMeetings: React.FC<TodaysMeetingsProps> = ({ data }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -69,11 +69,11 @@ const AlertsPanel: React.FC<AlertsPanelProps> = ({ data }) => {
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 h-full">
       <div className="flex items-center justify-between mb-6">
-        <div className="border-l-4 pl-3" style={{ borderLeftColor: '#024698' }}>
+        <div className="border-l-4 pl-3" style={{ borderLeftColor: '#026892' }}>
           <h2 className="text-xl font-bold text-gray-900">Alerts & Notifications</h2>
         </div>
         {data.newCount > 0 && (
-          <span className="text-white text-xs font-bold px-2 py-1 rounded-full" style={{ backgroundColor: '#024698' }}>
+          <span className="text-white text-xs font-bold px-2 py-1 rounded-full" style={{ backgroundColor: '#026892' }}>
             {data.newCount} New
           </span>
         )}

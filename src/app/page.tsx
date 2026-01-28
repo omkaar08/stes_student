@@ -6,7 +6,6 @@ import StatCard from "@/components/ui/StatCard";
 import TodayClasses from "@/components/ui/TodayClasses";
 import QuickActions from "@/components/ui/QuickActions";
 import PerformanceChart from "@/components/ui/PerformanceChart";
-import StudentEngagementTrends from "@/components/ui/StudentEngagementTrends";
 import UpcomingExams from "@/components/ui/UpcomingExams";
 import TodaysMeetings from "@/components/ui/TodaysMeetings";
 import RecentActivity from "@/components/ui/RecentActivity";
@@ -106,7 +105,7 @@ export default function HomePage() {
 
   return (
     <MainLayout>
-      <div className="w-full min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100">
+      <div className="w-full min-h-screen bg-gradient-to-b from-slate-50 via-slate-50 to-slate-100 pt-16">
         {/* Welcome Section */}
         <WelcomeSection
           userName={currentUser.name}
@@ -129,8 +128,7 @@ export default function HomePage() {
                 title={stat.title}
                 value={stat.value}
                 icon={stat.icon}
-                change={stat.change}
-              />
+                change={stat.change}                iconColor={stat.iconColor}              />
             ))}
           </div>
         </div>
@@ -151,21 +149,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Performance & Analytics - 2 Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] lg:grid-rows-2 gap-3 mb-3">
-            {/* Row 1: Performance + Meetings */}
-            <div className="lg:col-start-1 lg:row-start-1 bg-white rounded-lg border border-gray-200 shadow-sm">
+          {/* Performance & Analytics - 3 Column Layout in One Line */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-3">
+            {/* Column 1: Weekly Performance Trends */}
+            <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
               <PerformanceChart data={performanceChartData} />
             </div>
-            <div className="lg:col-start-2 lg:row-start-1 bg-white rounded-lg border border-gray-200 shadow-sm">
-              <TodaysMeetings data={todaysMeetingsData} />
-            </div>
 
-            {/* Row 2: Engagement + Activity */}
-            <div className="lg:col-start-1 lg:row-start-2 bg-white rounded-lg border border-gray-200 shadow-sm">
-              <StudentEngagementTrends data={engagementTrendsData} />
-            </div>
-            <div className="lg:col-start-2 lg:row-start-2 bg-white rounded-lg border border-gray-200 shadow-sm">
+            {/* Column 2: Upcoming Meetings */}
+            <TodaysMeetings data={todaysMeetingsData} />
+
+            {/* Column 3: Recent Activity */}
+            <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
               <RecentActivity data={recentActivityData} />
             </div>
           </div>

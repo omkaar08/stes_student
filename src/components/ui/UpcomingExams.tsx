@@ -36,47 +36,43 @@ const UpcomingExams: React.FC<UpcomingExamsProps> = ({ data }) => {
   }, [openExamId]);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-3.5 shadow-sm">
-      <div className="flex items-start justify-between mb-3.5">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-[320px] flex flex-col">
+      <div className="flex items-start justify-between mb-3">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">Upcoming Exams</h2>
-          <p className="text-xs text-gray-600">Scheduled examinations</p>
+          <h2 className="text-lg font-bold text-gray-900">Upcoming Exams</h2>
         </div>
         <button className="bg-white border border-gray-200 text-gray-900 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors">
           {data.total} Exams
         </button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 flex-1 overflow-y-auto">
         {data.exams.map((exam) => (
           <button
             key={exam.id}
             type="button"
             onClick={() => setOpenExamId(exam.id)}
-            className="group w-full text-left bg-gray-50 border border-gray-200 rounded-lg p-3 flex items-center justify-between gap-3 transition-all hover:bg-gray-100"
-            style={{ borderColor: exam.id === openExamId ? '#024698' : undefined, borderWidth: exam.id === openExamId ? '2px' : '1px' }}
+            className="group w-full text-left bg-gray-50 border border-gray-200 rounded-lg px-3 py-3.5 flex items-center justify-between gap-3 transition-all hover:bg-gray-100"
+            style={{ borderColor: exam.id === openExamId ? '#026892' : undefined, borderWidth: exam.id === openExamId ? '2px' : '1px' }}
           >
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-lg border-2 border-gray-200 flex flex-col items-center justify-center flex-shrink-0">
-                <div className="text-base font-extrabold leading-none" style={{ color: '#024698' }}>
-                  {exam.day}
-                </div>
-                <div className="text-xs font-semibold text-gray-700 uppercase mt-1">
-                  {exam.month}
-                </div>
+            <div className="flex items-center gap-3 min-w-0 flex-1">
+              {/* Icon */}
+              <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center">
+                <ClipboardList size={18} style={{ color: '#026892' }} />
               </div>
-
-              <div className="min-w-0">
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-semibold text-sm truncate text-gray-900 transition-colors flex-1" style={{ color: exam.id === openExamId ? '#024698' : undefined }}>
+              
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <h3 className="font-medium text-sm truncate text-gray-900 transition-colors flex-1" style={{ color: exam.id === openExamId ? '#026892' : undefined }}>
                     {exam.title}
                   </h3>
-                  <span className="text-white text-[10px] font-bold px-2 py-[5px] rounded-full flex-shrink-0" style={{ backgroundColor: '#024698' }}>
+                  <span className="text-white text-[10px] font-bold px-2.5 py-1 rounded-full flex-shrink-0" style={{ backgroundColor: '#026892' }}>
                     {exam.courseCode}
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs text-gray-600 mt-1.5">
-                  <Clock size={14} className="text-gray-500" />
+                {/* Additional Information */}
+                <div className="flex items-center gap-1.5 text-xs text-gray-600">
+                  <Clock size={12} className="text-gray-500 flex-shrink-0" />
                   <span>{exam.time}</span>
                 </div>
               </div>
@@ -99,7 +95,7 @@ const UpcomingExams: React.FC<UpcomingExamsProps> = ({ data }) => {
 
           <div className="relative w-[92%] max-w-3xl rounded-xl overflow-hidden shadow-2xl border border-gray-200">
             {/* Header */}
-            <div className="px-8 py-6 text-white" style={{ backgroundColor: '#024698' }}>
+            <div className="px-8 py-6 text-white" style={{ backgroundColor: '#026892' }}>
               <button
                 type="button"
                 aria-label="Close"

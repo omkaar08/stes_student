@@ -45,33 +45,36 @@ const QuickActions: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-3 shadow-sm h-full flex flex-col">
+    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-[320px] flex flex-col">
       <div className="mb-3">
-        <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
+        <h2 className="text-lg font-bold text-gray-900">Quick Actions</h2>
       </div>
 
-      <div className="space-y-2 flex-1 flex flex-col">
-        {actions.map((action) => (
-          <Link key={action.id} href={action.href} className="block">
-            <div
-              role="button"
-              tabIndex={0}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-gray-50 border border-gray-200 hover:bg-gray-100 hover:border-gray-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#024698]/20"
-            >
-              <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-white border border-gray-200 grid place-items-center text-[#024698]">
-                {action.icon}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm text-gray-900">
-                  {action.label}
+      <div className="space-y-2 flex flex-col">
+        {actions.map((action, index) => {
+          const isBlueAction = index < 2;
+          const bgColor = isBlueAction ? 'bg-blue-50' : 'bg-orange-50';
+          const iconColor = isBlueAction ? 'text-blue-600' : 'text-orange-600';
+
+          return (
+            <Link key={action.id} href={action.href} className="block">
+              <div
+                role="button"
+                tabIndex={0}
+                className={`flex items-center gap-3 px-4 py-4 rounded-lg ${bgColor} border border-gray-200 hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#026892]/20`}
+              >
+                <div className={`flex-shrink-0 ${iconColor}`}>
+                  <span className="[&>svg]:h-5 [&>svg]:w-5">{action.icon}</span>
                 </div>
-                <div className="text-xs text-gray-600 mt-0.5">
-                  {action.description}
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-sm text-gray-900">
+                    {action.label}
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

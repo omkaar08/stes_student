@@ -60,9 +60,8 @@ export interface HeaderProps {
 }
 
 export interface SidebarProps {
-  className?: string;
-  isOpen?: boolean;
-  onClose?: () => void;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
 export interface AvatarProps {
@@ -94,16 +93,13 @@ export interface NavItem {
   children?: NavItem[];
 }
 
-export interface SidebarProps {
-  className?: string;
-}
-
 // Dashboard Stats types
 export interface StatCard {
   id: string;
   title: string;
   value: string | number;
   icon: React.ReactNode;
+  iconColor?: string;
   change?: {
     value?: number;
     isPositive?: boolean;
@@ -136,6 +132,7 @@ export interface StatCardProps {
   title: string;
   value: string | number;
   icon: React.ReactNode;
+  iconColor?: string;
   change?: {
     value?: number;
     isPositive?: boolean;

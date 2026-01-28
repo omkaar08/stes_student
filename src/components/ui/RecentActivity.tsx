@@ -21,11 +21,11 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
     const iconProps = { size: 18, className: "text-primary-500" };
     switch (type) {
       case "submission":
-        return <FileText {...iconProps} className="text-green-600" />;
+        return <FileText {...iconProps} className="text-blue-600" />;
       case "attendance":
-        return <CheckSquare {...iconProps} className="text-primary-500" />;
+        return <CheckSquare {...iconProps} className="text-blue-600" />;
       case "message":
-        return <MessageSquare {...iconProps} className="text-purple-600" />;
+        return <MessageSquare {...iconProps} className="text-orange-600" />;
       case "deadline":
         return <AlertCircle {...iconProps} className="text-orange-600" />;
       case "grading":
@@ -38,11 +38,11 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
   const getActivityColor = (type: string) => {
     switch (type) {
       case "submission":
-        return "bg-green-50";
+        return "bg-blue-50";
       case "attendance":
-        return "bg-primary-50";
+        return "bg-blue-50";
       case "message":
-        return "bg-purple-50";
+        return "bg-orange-50";
       case "deadline":
         return "bg-orange-50";
       case "grading":
@@ -56,16 +56,15 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
 
   return (
     <>
-      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-full flex flex-col">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-[280px] flex flex-col">
         {/* Header */}
-        <div className="flex items-start justify-between mb-3">
+        <div className="flex items-start justify-between mb-2.5">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
-            <p className="text-xs text-gray-600">Latest updates and notifications</p>
+            <h2 className="text-lg font-bold text-gray-900">Recent Activity</h2>
           </div>
           <button
             onClick={() => alert("View All Activities")}
-            className="font-semibold text-xs text-primary-500 hover:text-primary-600 transition-colors"
+            className="bg-white border border-gray-200 text-gray-900 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-gray-50 transition-colors"
           >
             View All
           </button>
@@ -73,7 +72,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
 
         {/* Activity List */}
         <div className="flex-1 overflow-hidden flex flex-col">
-          <div className="flex-1 overflow-y-auto space-y-2">
+          <div className="flex-1 overflow-y-auto space-y-2 scrollbar-hide">
             {displayedActivities.map((activity) => (
               <button
                 key={activity.id}
@@ -81,10 +80,10 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                 onClick={() => setSelectedActivity(activity)}
                 onMouseEnter={() => setHoveredId(activity.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className={`w-full text-left border border-gray-200 rounded-lg p-3 transition-all group text-sm ${
+                className={`w-full text-left border border-gray-200 rounded-lg p-3 transition-all group text-sm ${getActivityColor(activity.type)} ${
                   hoveredId === activity.id
-                    ? "bg-gray-100 border-gray-300"
-                    : "bg-gray-50 hover:bg-gray-100"
+                    ? "shadow-md"
+                    : "hover:shadow-md"
                 }`}
               >
                 <div className="flex items-start gap-3">

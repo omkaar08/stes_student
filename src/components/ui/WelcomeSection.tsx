@@ -26,16 +26,14 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({
   };
 
   return (
-    <div className="w-full bg-gradient-to-r from-slate-50 via-blue-50/30 to-slate-50 backdrop-blur-sm">
-      <div className="px-4 py-3 sm:py-4">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-1 leading-tight">
-          <span className="text-gray-900">Hello,</span>{" "}
-          <span className="text-gray-900">{userName}</span>
+    <div className="w-full">
+      <div className="px-4 py-3 pt-4">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-1 leading-tight text-gray-900">
+          Welcome back, {userName}!
         </h1>
 
-        <p className="text-sm sm:text-base text-gray-600 font-medium mb-0 leading-relaxed max-w-4xl">
-          Inspire minds, shape futures, and empower the next generation of
-          leaders
+        <p className="text-sm text-gray-500 font-normal mb-0 leading-relaxed max-w-4xl">
+          Here's what's happening with your academic journey today.
         </p>
       </div>
     </div>

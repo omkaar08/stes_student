@@ -46,10 +46,11 @@ export const currentUser: User = {
 export const dashboardStats: StatCard[] = [
   {
     id: "total-students",
-    title: "Students",
+    title: "Total Students",
     value: 234,
     change: { text: "+12% from last semester", variant: "positive" },
     icon: dashboardIcons.totalStudents,
+    iconColor: "blue",
   },
   {
     id: "active-courses",
@@ -57,6 +58,7 @@ export const dashboardStats: StatCard[] = [
     value: 8,
     change: { text: "+2.1% from last week", variant: "positive" },
     icon: dashboardIcons.activeCourses,
+    iconColor: "green",
   },
   {
     id: "pending-tasks",
@@ -64,6 +66,7 @@ export const dashboardStats: StatCard[] = [
     value: 15,
     change: { text: "5 high priority", variant: "warning" },
     icon: dashboardIcons.pendingTasks,
+    iconColor: "red",
   },
   {
     id: "avg-performance",
@@ -71,6 +74,7 @@ export const dashboardStats: StatCard[] = [
     value: "87%",
     change: { text: "+1.2% from last week", variant: "positive" },
     icon: dashboardIcons.avgPerformance,
+    iconColor: "blue",
   },
 ];
 

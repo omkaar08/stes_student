@@ -37,7 +37,7 @@ const Avatar: React.FC<AvatarProps> = ({
         hover:scale-105
         ${className}
       `}
-      style={{ backgroundColor: '#024698' }}
+      style={{ backgroundColor: '#026892' }}
     >
       {src ? (
         <img src={src} alt={name} className="w-full h-full object-cover" />

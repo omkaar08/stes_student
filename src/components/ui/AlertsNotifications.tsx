@@ -81,7 +81,7 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
 
         {/* Count Badge */}
         {data.unreadCount > 0 && (
-          <span className="text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: '#024698' }}>
+          <span className="text-xs font-semibold px-3 py-1 rounded-full text-white" style={{ backgroundColor: '#026892' }}>
             {data.unreadCount} New
           </span>
         )}
@@ -127,7 +127,7 @@ const AlertsNotifications: React.FC<AlertsNotificationsProps> = ({ data }) => {
       </div>
 
       {/* View All Button */}
-      <button style={{ backgroundColor: '#024698' }} className="w-full hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200">
+      <button style={{ backgroundColor: '#026892' }} className="w-full hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200">
         View All Notifications
       </button>
     </div>

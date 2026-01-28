@@ -48,33 +48,30 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
   };
 
   return (
-    <div className="h-full flex flex-col p-3 min-h-[260px]">
+    <div className="h-[280px] flex flex-col p-4">
       {/* Header Section */}
-      <div className="flex items-start justify-between gap-3 mb-2.5">
-        <div>
-          <h2 className="text-base font-semibold text-gray-900 leading-tight">
-            {data.title}
-          </h2>
-          <p className="text-[11px] text-gray-500 mt-1">{data.subtitle}</p>
-        </div>
-        <div className="hidden sm:flex items-center gap-3 text-[11px]">
-          <div className="flex items-center gap-2">
+      <div className="mb-1.5">
+        <h2 className="text-lg font-bold text-gray-900 leading-tight mb-1.5">
+          {data.title}
+        </h2>
+        <div className="flex items-center gap-3 text-[10px]">
+          <div className="flex items-center gap-1.5">
             <div
-              className="w-3 h-3 rounded-full"
+              className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: "#1e3a8a" }}
             ></div>
             <span className="text-gray-600 font-medium">Attendance</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <div
-              className="w-3 h-3 rounded-full"
+              className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: "#3b82f6" }}
             ></div>
             <span className="text-gray-600 font-medium">Engagement</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <div
-              className="w-3 h-3 rounded-full"
+              className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: "#14b8a6" }}
             ></div>
             <span className="text-gray-600 font-medium">Assignments</span>
@@ -83,11 +80,11 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
       </div>
 
       {/* Chart Section */}
-      <div className="w-full flex-1 min-h-[200px]">
+      <div className="w-full flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={data.data}
-            margin={{ top: 8, right: 18, left: 0, bottom: 0 }}
+            margin={{ top: 5, right: 10, left: -10, bottom: 5 }}
           >
             {/* Clean horizontal grid lines only */}
             <CartesianGrid
@@ -102,8 +99,8 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
               dataKey="day"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "#6b7280", fontWeight: 500 }}
-              dy={10}
+              tick={{ fontSize: 11, fill: "#6b7280", fontWeight: 500 }}
+              dy={8}
               interval={0}
             />
 
@@ -111,10 +108,11 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({ data }) => {
             <YAxis
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: "#9ca3af", fontWeight: 500 }}
+              tick={{ fontSize: 11, fill: "#9ca3af", fontWeight: 500 }}
               ticks={[0, 25, 50, 75, 100]}
               domain={[0, 100]}
-              dx={-5}
+              dx={0}
+              width={40}
             />
 
             {/* Smooth tooltip with cursor */}

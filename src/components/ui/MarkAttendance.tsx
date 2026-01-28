@@ -126,7 +126,7 @@ const MarkAttendance: React.FC<MarkAttendanceProps> = ({ data }) => {
           <button
             onClick={markAllPresent}
             className="hover:opacity-90 text-white font-semibold px-5 py-2.5 rounded-lg flex items-center gap-2 transition-all"
-            style={{ backgroundColor: '#024698' }}
+            style={{ backgroundColor: '#026892' }}
           >
             <UserCheck size={18} />
             Mark All Present
