@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { AvatarProps } from '@/types';
 
 const Avatar: React.FC<AvatarProps> = ({ 
@@ -11,6 +12,12 @@ const Avatar: React.FC<AvatarProps> = ({
     sm: 'w-8 h-8 text-xs',
     md: 'w-10 h-10 text-sm',
     lg: 'w-12 h-12 text-base',
+  };
+
+  const sizePixels = {
+    sm: 32,
+    md: 40,
+    lg: 48,
   };
 
   const getInitials = (name: string): string => {
@@ -40,7 +47,13 @@ const Avatar: React.FC<AvatarProps> = ({
       style={{ backgroundColor: '#026892' }}
     >
       {src ? (
-        <img src={src} alt={name} className="w-full h-full object-cover" />
+        <Image 
+          src={src} 
+          alt={name} 
+          width={sizePixels[size]}
+          height={sizePixels[size]}
+          className="w-full h-full object-cover" 
+        />
       ) : (
         <span>{getInitials(name)}</span>
       )}
@@ -49,5 +62,3 @@ const Avatar: React.FC<AvatarProps> = ({
 };
 
 export default Avatar;
-
-

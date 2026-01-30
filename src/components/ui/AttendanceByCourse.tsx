@@ -42,7 +42,7 @@ const AttendanceByCourse: React.FC<AttendanceByCourseProps> = ({ items }) => {
         </div>
         <div className="flex items-center gap-2 bg-green-50 px-3 py-1.5 rounded-full">
           <CheckCircle className="w-4 h-4 text-green-600" />
-          <span className="text-sm font-medium text-green-700">Target Exceeded (>75%)</span>
+          <span className="text-sm font-medium text-green-700">Target Exceeded (75%)</span>
         </div>
       </div>
 

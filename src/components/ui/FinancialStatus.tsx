@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import { EyeOff, Eye, CreditCard } from "lucide-react";
 
 type FinancialStatusProps = {
-  semesterFeesMasked: string;
-  paidMasked: string;
-  remainingMasked: string;
+  semesterFees: string;
+  paid: string;
+  remaining: string;
   paidProgress: number; // 0..1
   nextPaymentDue: string;
 };
@@ -14,9 +14,9 @@ type FinancialStatusProps = {
 const BRAND_BLUE = "#026892";
 
 const FinancialStatus: React.FC<FinancialStatusProps> = ({
-  semesterFeesMasked,
-  paidMasked,
-  remainingMasked,
+  semesterFees,
+  paid,
+  remaining,
   paidProgress,
   nextPaymentDue,
 }) => {
@@ -47,14 +47,14 @@ const FinancialStatus: React.FC<FinancialStatusProps> = ({
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-700 font-medium">Semester Fees</span>
           <span className="text-gray-900 font-semibold">
-            {isVisible ? "RWF 850,000" : "RWF ******"}
+            {isVisible ? semesterFees : "RWF ******"}
           </span>
         </div>
 
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-700 font-medium">Paid</span>
           <span className="text-[#026892] font-semibold">
-            {isVisible ? "RWF 680,000" : "RWF ******"}
+            {isVisible ? paid : "RWF ******"}
           </span>
         </div>
 
@@ -71,7 +71,7 @@ const FinancialStatus: React.FC<FinancialStatusProps> = ({
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-700 font-medium">Remaining</span>
           <span className="text-orange-600 font-semibold">
-            {isVisible ? "RWF 170,000" : "RWF ******"}
+            {isVisible ? remaining : "RWF ******"}
           </span>
         </div>
 
