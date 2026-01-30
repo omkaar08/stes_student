@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { CheckSquare, Calendar, Users, Bell } from "lucide-react";
+import { Calendar, BookOpen, CheckCircle2, FileText } from "lucide-react";
 
 interface QuickAction {
   id: string;
@@ -10,64 +10,86 @@ interface QuickAction {
   description: string;
   icon: React.ReactNode;
   href: string;
+  variant: "blue" | "green" | "orange";
 }
 
 const QuickActions: React.FC = () => {
   const actions: QuickAction[] = [
     {
-      id: "attendance",
-      label: "Mark Attendance",
-      description: "Record class attendance",
-      icon: <CheckSquare size={20} />,
-      href: "/students/mark-attendance",
-    },
-    {
       id: "timetable",
       label: "View Timetable",
-      description: "Check your class schedule",
+      description: "",
       icon: <Calendar size={20} />,
-      href: "/teaching/timetable",
+      href: "/academic",
+      variant: "blue",
     },
     {
-      id: "classes",
-      label: "Class Lists",
-      description: "Manage student rosters",
-      icon: <Users size={20} />,
-      href: "/students/class-lists",
+      id: "grades",
+      label: "View Grades",
+      description: "",
+      icon: <BookOpen size={20} />,
+      href: "/academic",
+      variant: "blue",
     },
     {
-      id: "notify",
-      label: "Notify Students",
-      description: "Send notifications",
-      icon: <Bell size={20} />,
-      href: "/teaching/notify",
+      id: "check-attendance",
+      label: "Check Attendance",
+      description: "",
+      icon: <CheckCircle2 size={20} />,
+      href: "/academic",
+      variant: "green",
+    },
+    {
+      id: "request-document",
+      label: "Request Document",
+      description: "",
+      icon: <FileText size={20} />,
+      href: "/documents",
+      variant: "orange",
     },
   ];
 
+  const getItemStyles = (variant: QuickAction["variant"]) => {
+    switch (variant) {
+      case "green":
+        return {
+          bg: "bg-[#E6F4FF]",
+          icon: "text-emerald-600",
+          text: "text-emerald-700",
+        };
+      case "orange":
+        return {
+          bg: "bg-orange-50",
+          icon: "text-orange-600",
+          text: "text-orange-700",
+        };
+      default:
+        return {
+          bg: "bg-[#E6F4FF]",
+          icon: "text-blue-600",
+          text: "text-blue-700",
+        };
+    }
+  };
+
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm h-[320px] flex flex-col">
-      <div className="mb-3">
-        <h2 className="text-lg font-bold text-gray-900">Quick Actions</h2>
-      </div>
+    <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm h-[320px] flex flex-col">
+      <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
 
       <div className="space-y-2 flex flex-col">
-        {actions.map((action, index) => {
-          const isBlueAction = index < 2;
-          const bgColor = isBlueAction ? 'bg-blue-50' : 'bg-orange-50';
-          const iconColor = isBlueAction ? 'text-blue-600' : 'text-orange-600';
+        {actions.map((action) => {
+          const styles = getItemStyles(action.variant);
 
           return (
             <Link key={action.id} href={action.href} className="block">
               <div
-                role="button"
-                tabIndex={0}
-                className={`flex items-center gap-3 px-4 py-4 rounded-lg ${bgColor} border border-gray-200 hover:shadow-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#026892]/20`}
+                className={`flex items-center gap-3 px-5 py-4 rounded-xl ${styles.bg} hover:shadow-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#026892]/20`}
               >
-                <div className={`flex-shrink-0 ${iconColor}`}>
+                <div className={`flex-shrink-0 ${styles.icon}`}>
                   <span className="[&>svg]:h-5 [&>svg]:w-5">{action.icon}</span>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-medium text-sm text-gray-900">
+                  <div className={`font-semibold text-sm ${styles.text}`}>
                     {action.label}
                   </div>
                 </div>
@@ -81,5 +103,3 @@ const QuickActions: React.FC = () => {
 };
 
 export default QuickActions;
-
-

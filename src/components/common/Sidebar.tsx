@@ -1,17 +1,22 @@
-import { useState } from "react";
+"use client";
+
+import { useMemo } from "react";
 import Link from "next/link";
 import {
-  LayoutDashboard,
-  Users,
-  CheckSquare,
-  BarChart3,
-  ChevronDown,
   ChevronRight,
+  Home,
+  BookOpen,
+  CreditCard,
+  LibraryBig,
+  Building2,
+  LifeBuoy,
+  FileText,
+  User,
   Menu,
 } from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-
-const BRAND_BLUE = "#026892";
 
 interface NavItem {
   id: string;
@@ -19,57 +24,27 @@ interface NavItem {
   icon: React.ElementType;
   active?: boolean;
   href?: string;
-  children?: { id: string; label: string; href: string }[];
 }
 
 const navItems: NavItem[] = [
+  { id: "dashboard", label: "Dashboard", icon: Home, href: "/" },
+  { id: "academic", label: "Academic", icon: BookOpen, href: "/academic" },
+  { id: "finance", label: "Finance", icon: CreditCard, href: "/finance" },
+  { id: "library", label: "Library", icon: LibraryBig, href: "/library" },
   {
-    id: "dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    active: true, // ✅ DEFAULT ACTIVE
-    href: "/",
+    id: "accommodation",
+    label: "Accommodation",
+    icon: Building2,
+    href: "/accommodation",
   },
   {
-    id: "teaching",
-    label: "Teaching",
-    icon: Users,
-    children: [
-      { id: "assigned-modules", label: "Assigned Modules", href: "/teaching/modules" },
-      { id: "teaching-plan", label: "Teaching Plan", href: "/teaching/plan" },
-      { id: "timetable", label: "Timetable", href: "/teaching/timetable" },
-      { id: "attendance", label: "Attendance", href: "/students/mark-attendance" },
-      { id: "notify-students", label: "Notify Students", href: "/teaching/notify" },
-    ],
+    id: "support",
+    label: "Support Services",
+    icon: LifeBuoy,
+    href: "/support-services",
   },
-  {
-    id: "students",
-    label: "Students",
-    icon: Users,
-    children: [
-      { id: "class-lists", label: "Class Lists", href: "/students/class-lists" },
-      { id: "performance", label: "Performance", href: "/students/performance" },
-      { id: "absences", label: "Absences", href: "/students/absences" },
-      { id: "claims", label: "Claims", href: "/students/claims" },
-      { id: "absence-requests", label: "Absence Requests", href: "/students/absence-requests" },
-    ],
-  },
-  {
-    id: "assessment",
-    label: "Assessment",
-    icon: CheckSquare,
-    children: [
-      { id: "calendar", label: "Calendar", href: "/calendar" },
-      { id: "grades", label: "Grades", href: "/assessment/grades" },
-      { id: "results", label: "Results", href: "/assessment/results" },
-    ],
-  },
-  {
-    id: "reports",
-    label: "Reports",
-    icon: BarChart3,
-    href: "/analytics",
-  },
+  { id: "documents", label: "Documents", icon: FileText, href: "/documents" },
+  { id: "profile", label: "Profile", icon: User, href: "/profile" },
 ];
 
 interface SidebarProps {
@@ -78,15 +53,11 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
-
-  const toggleExpanded = (id: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(id)
-        ? prev.filter((item) => item !== id)
-        : [...prev, id]
-    );
-  };
+  const pathname = usePathname();
+  const activeId = useMemo(() => {
+    const match = navItems.find((item) => item.href === pathname);
+    return match?.id || "dashboard";
+  }, [pathname]);
 
   return (
     <>
@@ -102,76 +73,45 @@ const Sidebar = ({ isOpen, onToggle }: SidebarProps) => {
       <aside
         className={cn(
           "fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-200 z-40 transition-transform duration-300 lg:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          isOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
+        {/* Logo */}
+        <div className="h-16 flex items-center justify-center">
+          <Image
+            src="/images/ur-logo.jpeg"
+            alt="UR"
+            width={44}
+            height={44}
+            className="rounded-full"
+            priority
+          />
+        </div>
+
         {/* Navigation */}
-        <nav className="p-3 space-y-1 mt-16">
+        <nav className="p-3 space-y-1">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isExpanded = expandedItems.includes(item.id);
-            const hasChildren = !!item.children?.length;
+            const isActive = item.id === activeId;
+            const showChevron = item.id !== "dashboard";
 
             return (
-              <div key={item.id}>
-                {hasChildren ? (
-                  <button
-                    onClick={() => toggleExpanded(item.id)}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                      item.active
-                        ? "text-white"
-                        : "text-gray-600 hover:bg-blue-50"
-                    )}
-                    style={
-                      item.active
-                        ? { backgroundColor: BRAND_BLUE }
-                        : undefined
-                    }
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span className="flex-1 text-left">{item.label}</span>
-                    {isExpanded ? (
-                      <ChevronDown className="w-4 h-4" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4" />
-                    )}
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href || "/"}
-                    className={cn(
-                      "w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
-                      item.active
-                        ? "text-white"
-                        : "text-gray-600 hover:bg-blue-50"
-                    )}
-                    style={
-                      item.active
-                        ? { backgroundColor: BRAND_BLUE }
-                        : undefined
-                    }
-                  >
-                    <Icon className="w-5 h-5" />
-                    <span className="flex-1 text-left">{item.label}</span>
-                  </Link>
+              <Link
+                key={item.id}
+                href={item.href || "/"}
+                className={cn(
+                  "w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors",
+                  isActive
+                    ? "bg-[#EAF7F1] text-[#026892]"
+                    : "text-gray-900 hover:bg-gray-50",
                 )}
-
-                {/* Submodules */}
-                {hasChildren && isExpanded && (
-                  <div className="ml-8 mt-1 space-y-1">
-                    {item.children!.map((child) => (
-                      <Link
-                        key={child.id}
-                        href={child.href}
-                        className="block w-full text-left px-3 py-2 text-sm text-gray-600 rounded-md hover:bg-blue-50 hover:text-[#026892] transition-colors"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
+              >
+                <Icon className="w-5 h-5" />
+                <span className="flex-1 text-left">{item.label}</span>
+                {showChevron && (
+                  <ChevronRight className="w-4 h-4 text-gray-400" />
                 )}
-              </div>
+              </Link>
             );
           })}
         </nav>

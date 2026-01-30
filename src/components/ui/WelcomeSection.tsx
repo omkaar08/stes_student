@@ -5,25 +5,10 @@ import { useAcademicContext } from "@/contexts/AcademicContext";
 
 interface WelcomeSectionProps {
   userName: string;
-  employeeId?: string;
 }
 
-const WelcomeSection: React.FC<WelcomeSectionProps> = ({
-  userName,
-  employeeId,
-}) => {
-  const { academicYear, semester } = useAcademicContext();
-
-  // Get current date dynamically
-  const getCurrentDate = () => {
-    const date = new Date();
-    return date.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
+const WelcomeSection: React.FC<WelcomeSectionProps> = ({ userName }) => {
+  useAcademicContext();
 
   return (
     <div className="w-full">
@@ -33,7 +18,7 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({
         </h1>
 
         <p className="text-sm text-gray-500 font-normal mb-0 leading-relaxed max-w-4xl">
-          Here's what's happening with your teaching today.
+          Here&apos;s what&apos;s happening with your academic journey today.
         </p>
       </div>
     </div>
@@ -41,5 +26,3 @@ const WelcomeSection: React.FC<WelcomeSectionProps> = ({
 };
 
 export default WelcomeSection;
-
-

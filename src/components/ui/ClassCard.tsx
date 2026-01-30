@@ -14,7 +14,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ session, index = 0 }) => {
       return "bg-white text-gray-700 border-gray-300 hover:bg-gray-50";
     }
 
-    return "bg-white text-gray-700 border-gray-300 hover:bg-gray-50";
+    return "bg-gray-100 text-gray-600 border-transparent hover:bg-gray-200";
   };
 
   const getActionLabel = (status: ClassStatus) => {
@@ -27,14 +27,16 @@ const ClassCard: React.FC<ClassCardProps> = ({ session, index = 0 }) => {
 
   return (
     <div
-      className={`rounded-lg border p-3 transition-all duration-200 ${
-        isHighlighted ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"
+      className={`rounded-xl border p-4 transition-all duration-200 ${
+        isHighlighted
+          ? "bg-[#E6F4FF] border-blue-200"
+          : "bg-white border-gray-200"
       }`}
     >
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1">
           <div
-            className={`text-sm font-medium truncate ${
+            className={`text-sm font-semibold truncate ${
               isHighlighted ? "text-[#026892]" : "text-gray-900"
             }`}
           >
@@ -49,12 +51,12 @@ const ClassCard: React.FC<ClassCardProps> = ({ session, index = 0 }) => {
           </div>
         </div>
 
-        <Link href="/teaching/timetable" className="flex-shrink-0">
+        <Link href="/academic" className="flex-shrink-0">
           <button
             type="button"
             className={`
               inline-flex items-center justify-center
-              px-3.5 py-1.5 rounded-lg font-semibold text-xs
+              px-4 py-1.5 rounded-full font-semibold text-xs
               border transition-all duration-200 active:scale-95 whitespace-nowrap
               ${getActionButtonStyle(session.status)}
             `}
@@ -68,5 +70,3 @@ const ClassCard: React.FC<ClassCardProps> = ({ session, index = 0 }) => {
 };
 
 export default ClassCard;
-
-

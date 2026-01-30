@@ -1,16 +1,17 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import '@/styles/globals.css';
-import AcademicProviderWrapper from '@/components/providers/AcademicProviderWrapper';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "@/styles/globals.css";
+import AcademicProviderWrapper from "@/components/providers/AcademicProviderWrapper";
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
-  title: 'Lecturer Dashboard - STES',
-  description: 'Professional lecturer dashboard for managing courses, students, and resources',
+  title: "Student Dashboard - STES",
+  description:
+    "Student dashboard for tracking academics, attendance, and finances",
 };
 
 export default function RootLayout({
@@ -21,12 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <AcademicProviderWrapper>
-          {children}
-        </AcademicProviderWrapper>
+        <AcademicProviderWrapper>{children}</AcademicProviderWrapper>
       </body>
     </html>
   );
 }
-
-

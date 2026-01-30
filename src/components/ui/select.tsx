@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { ReactNode } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React, { ReactNode } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface SelectContextType {
   value: string;
@@ -10,12 +10,14 @@ interface SelectContextType {
   setIsOpen: (open: boolean) => void;
 }
 
-const SelectContext = React.createContext<SelectContextType | undefined>(undefined);
+const SelectContext = React.createContext<SelectContextType | undefined>(
+  undefined,
+);
 
 const useSelect = () => {
   const context = React.useContext(SelectContext);
   if (!context) {
-    throw new Error('useSelect must be used within a Select component');
+    throw new Error("useSelect must be used within a Select component");
   }
   return context;
 };
@@ -27,8 +29,13 @@ interface SelectProps {
   defaultValue?: string;
 }
 
-const Select = ({ children, value: controlledValue, onValueChange, defaultValue }: SelectProps) => {
-  const [internalValue, setInternalValue] = React.useState(defaultValue || '');
+const Select = ({
+  children,
+  value: controlledValue,
+  onValueChange,
+  defaultValue,
+}: SelectProps) => {
+  const [internalValue, setInternalValue] = React.useState(defaultValue || "");
   const [isOpen, setIsOpen] = React.useState(false);
 
   const value = controlledValue !== undefined ? controlledValue : internalValue;
@@ -40,7 +47,9 @@ const Select = ({ children, value: controlledValue, onValueChange, defaultValue 
   };
 
   return (
-    <SelectContext.Provider value={{ value, onChange: handleChange, isOpen, setIsOpen }}>
+    <SelectContext.Provider
+      value={{ value, onChange: handleChange, isOpen, setIsOpen }}
+    >
       <div className="relative inline-block">{children}</div>
     </SelectContext.Provider>
   );
@@ -51,8 +60,8 @@ interface SelectTriggerProps {
   className?: string;
 }
 
-const SelectTrigger = ({ children, className = '' }: SelectTriggerProps) => {
-  const { isOpen, setIsOpen, value } = useSelect();
+const SelectTrigger = ({ children, className = "" }: SelectTriggerProps) => {
+  const { isOpen, setIsOpen } = useSelect();
 
   return (
     <button
@@ -69,7 +78,7 @@ interface SelectValueProps {
   placeholder?: string;
 }
 
-const SelectValue = ({ placeholder = '' }: SelectValueProps) => {
+const SelectValue = ({ placeholder = "" }: SelectValueProps) => {
   const { value } = useSelect();
   return <span>{value || placeholder}</span>;
 };
@@ -79,13 +88,15 @@ interface SelectContentProps {
   className?: string;
 }
 
-const SelectContent = ({ children, className = '' }: SelectContentProps) => {
+const SelectContent = ({ children, className = "" }: SelectContentProps) => {
   const { isOpen } = useSelect();
 
   if (!isOpen) return null;
 
   return (
-    <div className={`absolute top-full left-0 mt-1 min-w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 ${className}`}>
+    <div
+      className={`absolute top-full left-0 mt-1 min-w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 ${className}`}
+    >
       {children}
     </div>
   );
@@ -104,8 +115,8 @@ const SelectItem = ({ value, children }: SelectItemProps) => {
       onClick={() => onChange(value)}
       className={`w-full text-left px-4 py-2 text-sm transition-colors ${
         selectedValue === value
-          ? 'bg-blue-100 text-blue-900 font-semibold'
-          : 'text-gray-700 hover:bg-gray-100'
+          ? "bg-blue-100 text-blue-900 font-semibold"
+          : "text-gray-700 hover:bg-gray-100"
       }`}
     >
       {children}
