@@ -71,34 +71,6 @@ const TopBar: React.FC<HeaderProps> = ({ user, onToggleSidebar }) => {
 
           {/* Controls */}
           <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-            {/* Mobile: Academic Year + Semester (editable) */}
-            <div className="md:hidden flex items-center gap-2">
-              <Select value={academicYear} onValueChange={setAcademicYear}>
-                <SelectTrigger className="h-8 w-[116px] border-gray-200 text-xs font-medium whitespace-nowrap">
-                  <SelectValue placeholder="2024-2025" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="2024-2025">2024-2025</SelectItem>
-                  <SelectItem value="2025-2026">2025-2026</SelectItem>
-                </SelectContent>
-              </Select>
-
-              <Select
-                value={semesterLabel}
-                onValueChange={(value) =>
-                  setSemester(value === "semester one" ? "Fall" : "Spring")
-                }
-              >
-                <SelectTrigger className="h-8 w-[78px] border-gray-200 text-xs font-medium">
-                  <SelectValue placeholder="Sem 1" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="semester one">Sem 1</SelectItem>
-                  <SelectItem value="semester two">Sem 2</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
             {/* Notifications */}
             <button className="relative p-2 rounded-md hover:bg-gray-100">
               <Bell className="w-5 h-5 text-gray-600" />
