@@ -35,45 +35,45 @@ const EnrolledModulesTable: React.FC<EnrolledModulesTableProps> = ({
         <div className="overflow-y-auto h-full">
           <div className="overflow-x-auto">
             <table className="w-full text-sm min-w-[520px]">
-            <thead className="sticky top-0 bg-white">
-              <tr className="bg-gray-50 border-b border-gray-200">
-                <th
-                  scope="col"
-                  className="px-3 py-3 text-left text-xs font-semibold text-gray-600"
-                >
-                  Course Code
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3 text-left text-xs font-semibold text-gray-600"
-                >
-                  Course
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3 text-right text-xs font-semibold text-gray-600"
-                >
-                  Credits
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {items.map((module) => (
-                <tr
-                  key={module.code}
-                  className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
-                >
-                  <td className="px-3 py-3 font-semibold text-gray-900 whitespace-nowrap">
-                    {module.code}
-                  </td>
-                  <td className="px-3 py-3 text-gray-800">{module.name}</td>
-                  <td className="px-3 py-3 text-right text-gray-900 font-medium">
-                    {module.credits}
-                  </td>
+              <thead className="sticky top-0 bg-white">
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <th
+                    scope="col"
+                    className="px-3 py-3 text-left text-xs font-semibold text-gray-600"
+                  >
+                    Course Code
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3 text-left text-xs font-semibold text-gray-600"
+                  >
+                    Course
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3 text-right text-xs font-semibold text-gray-600"
+                  >
+                    Credits
+                  </th>
                 </tr>
-              ))}
-            </tbody>
+              </thead>
+
+              <tbody>
+                {items.map((module) => (
+                  <tr
+                    key={module.code}
+                    className="border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="px-3 py-3 font-semibold text-gray-900 whitespace-nowrap">
+                      {module.code}
+                    </td>
+                    <td className="px-3 py-3 text-gray-800">{module.name}</td>
+                    <td className="px-3 py-3 text-right text-gray-900 font-medium">
+                      {module.credits}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </div>
